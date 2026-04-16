@@ -21,49 +21,64 @@ This file contains a JSON object:
 
 If `state/seen.json` does not exist or is empty, treat it as `{"seen": {}}`.
 
-## Step 2: Fetch RSS/Atom Feeds
+## Step 2: Fetch and Parse All Feeds
 
-For each feed in `config/feeds.yaml`, fetch it using curl with a 30-second
-timeout and a User-Agent header of "AIDigest/1.0":
+Run the feed fetcher script:
 
 ```bash
-curl -sL --max-time 30 -H "User-Agent: AIDigest/1.0" "<feed_url>"
+python3 scripts/fetch_feeds.py --config config/feeds.yaml
 ```
 
-Parse the XML output to extract items. For each item, extract:
-- title
-- link (URL)
-- published date (if available)
-- description or summary snippet (first 500 characters)
+This script handles all feed fetching, XML parsing, URL normalization,
+SHA-256 hashing, and ArXiv keyword filtering. It outputs a JSON object
+to stdout with this structure:
 
-For URL normalization before hashing:
-- Lowercase the scheme and host
-- Strip tracking parameters: utm_*, ref, source, fbclid, gclid
-- Strip trailing slashes
-- Strip URL fragments (#...)
-- Sort remaining query parameters alphabetically
+```json
+{
+  "feeds": [
+    {
+      "title": "...",
+      "url": "...",
+      "url_hash": "<sha256>",
+      "published": "...",
+      "description": "...",
+      "authors": "...",
+      "source": "Feed Name",
+      "category": "vendor"
+    }
+  ],
+  "arxiv": [
+    {
+      "title": "...",
+      "url": "...",
+      "url_hash": "<sha256>",
+      "authors": "...",
+      "abstract": "...",
+      "matched_keywords": ["agent", "planning"],
+      "source": "arxiv:cs.AI",
+      "category": "research"
+    }
+  ],
+  "errors": [
+    {"feed": "...", "url": "...", "error": "..."}
+  ],
+  "summary": {
+    "feeds_attempted": 14,
+    "feeds_failed": 0,
+    "feed_items": 85,
+    "arxiv_items_passed_filter": 12
+  }
+}
+```
 
-Compute a SHA-256 hash of the normalized URL. This is the dedup key.
+Save the full JSON output. You will need it for subsequent steps.
 
-If a feed fails to fetch or parse, log the error and continue to the next
-feed. Never abort the entire run because of a single feed failure.
+If the script fails entirely, log the error and continue to Step 3
+(web discovery) so the digest still has content. If it succeeds but
+`errors` is non-empty, note the failed feeds — include them in the
+commit message so feed rot is visible.
 
-Collect all successfully parsed items with their source name and category
-from the config.
-
-## Step 3: Filter ArXiv Papers
-
-For ArXiv feeds specifically (identified by `arxiv.feeds` in the config),
-apply keyword filtering to paper titles (case-insensitive):
-
-- Papers matching ANY keyword from `arxiv.keywords.high_signal` pass
-- Papers matching 2+ keywords from `arxiv.keywords.moderate_signal` pass
-- All other papers are dropped
-
-For papers that pass the filter, retain the title, abstract, authors,
-ArXiv URL, and which keywords matched.
-
-## Step 4: Web Discovery
+## Step 3: Web Discovery
 
 Use web search to find significant AI industry developments from the last
 24 hours that would not be covered by the RSS feeds. Search for:
@@ -87,13 +102,19 @@ Run 3-5 targeted web searches with specific queries like:
 For each significant finding, record: title, URL, a 2-3 sentence summary
 of why it matters, and a category.
 
+For each web-discovered item, compute a URL hash for deduplication:
+```bash
+python3 -c "from scripts.fetch_feeds import hash_url; print(hash_url('THE_URL'))"
+```
+
 Do NOT include: routine product updates, opinion pieces, rumors, or
 content older than 48 hours.
 
-## Step 5: Deduplicate
+## Step 4: Deduplicate
 
-For every item collected in Steps 2-4, check its URL hash against the
-`seen` object from state/seen.json.
+For every item collected in Steps 2-3, check its URL hash against the
+`seen` object from state/seen.json. Feed items already have `url_hash`
+from the script output. Web-discovered items need hashing as shown above.
 
 - If the hash exists in `seen`: skip the item (already ingested)
 - If the hash does not exist: keep the item as new
@@ -101,7 +122,7 @@ For every item collected in Steps 2-4, check its URL hash against the
 If no new items exist after deduplication, create a short commit noting
 "no new items for {date}", push, and exit. Do not create a digest post.
 
-## Step 6: Triage ArXiv Papers
+## Step 5: Triage ArXiv Papers
 
 For the ArXiv papers that passed keyword filtering AND are new (not in
 seen.json), assess each paper:
@@ -114,7 +135,7 @@ seen.json), assess each paper:
 
 Drop papers assessed as not relevant.
 
-## Step 7: Synthesize Daily Digest
+## Step 6: Synthesize Daily Digest
 
 Write a daily digest in markdown with this exact structure:
 
@@ -150,7 +171,7 @@ Style rules:
   claims without strong evidence).
 - Do NOT fabricate items. Only include items you actually found.
 
-## Step 8: Write the Digest File
+## Step 7: Write the Digest File
 
 Create the file `content/posts/{YYYY-MM-DD}.md` where the date is today.
 
@@ -175,7 +196,7 @@ to 200 characters if needed.
 
 Follow the front matter with the full digest markdown from Step 7.
 
-## Step 9: Update State
+## Step 8: Update State
 
 Build an updated seen.json:
 
@@ -188,7 +209,7 @@ Build an updated seen.json:
 The 90-day prune keeps the state file from growing unboundedly.
 Format the JSON with 2-space indentation for readable git diffs.
 
-## Step 10: Commit and Push
+## Step 9: Commit and Push
 
 Stage all changes:
 ```bash
