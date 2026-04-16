@@ -1,4 +1,4 @@
-baseURL = "https://sorcerousmachine.com/ai-news-digest"
+baseURL = "https://sorcerousmachine.com"
 languageCode = "en-us"
 title = "AI Digest"
 buildFuture = true
