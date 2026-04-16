@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="digest">
+  <header class="digest-header">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.tags }}
+    <div class="tags">
+      {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+  </header>
+  <div class="digest-content">
+    {{ .Content }}
+  </div>
+  <nav class="digest-nav">
+    <a href="/">&larr; All digests</a>
+  </nav>
+</article>
+{{ end }}

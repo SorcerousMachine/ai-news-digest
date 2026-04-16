@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="digest-list">
+  {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+  {{ range $paginator.Pages }}
+  <article class="digest-entry">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ with .Params.summary }}<p class="summary">{{ . }}</p>{{ end }}
+    {{ with .Params.tags }}
+    <div class="tags">
+      {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+  </article>
+  {{ end }}
+
+  {{ if gt $paginator.TotalPages 1 }}
+  <nav class="pagination">
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="pagination-prev">Newer</a>
+    {{ end }}
+    <span class="pagination-info">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="pagination-next">Older</a>
+    {{ end }}
+  </nav>
+  {{ end }}
+</div>
+{{ end }}
