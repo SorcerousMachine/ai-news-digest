@@ -180,6 +180,9 @@ def fetch_feed(url: str) -> tuple[feedparser.FeedParserDict | None, str | None]:
         )
         if feed.bozo and not feed.entries:
             return None, f"Parse error: {feed.bozo_exception}"
+        if feed.bozo and feed.entries:
+            # Partial parse — usable but worth logging
+            return feed, f"Warning: {feed.bozo_exception} ({len(feed.entries)} entries recovered)"
         return feed, None
     except Exception as e:
         return None, str(e)
@@ -214,6 +217,7 @@ def main():
         "feeds": [],
         "arxiv": [],
         "errors": [],
+        "warnings": [],
     }
 
     all_feed_items = []
@@ -227,10 +231,12 @@ def main():
         url = feed_cfg["url"]
         category = feed_cfg.get("category", "other")
 
-        feed_data, error = fetch_feed(url)
-        if error:
-            result["errors"].append({"feed": name, "url": url, "error": error})
+        feed_data, msg = fetch_feed(url)
+        if msg and feed_data is None:
+            result["errors"].append({"feed": name, "url": url, "error": msg})
             continue
+        if msg:
+            result["warnings"].append({"feed": name, "url": url, "warning": msg})
 
         items = parse_feed_items(feed_data, name, category)
         all_feed_items.extend(items)
@@ -253,10 +259,12 @@ def main():
     for url in arxiv_cfg.get("feeds", []):
         feed_name = url.split("/")[-1] if "/" in url else url
 
-        feed_data, error = fetch_feed(url)
-        if error:
-            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": error})
+        feed_data, msg = fetch_feed(url)
+        if msg and feed_data is None:
+            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": msg})
             continue
+        if msg:
+            result["warnings"].append({"feed": f"arxiv:{feed_name}", "url": url, "warning": msg})
 
         for entry in feed_data.entries:
             link = entry.get("link", "")
