@@ -62,7 +62,7 @@ Configured in `config/feeds.yaml`.
 
 ## Architecture Decisions
 
-- **Python for feed processing.** feedparser handles RSS/Atom quirks deterministically. URL normalization and hashing are exact, not LLM-approximate. Claude receives clean JSON instead of raw XML.
+- **Python for feed processing.** atoma (pure-Python, defusedxml-based) handles RSS/Atom parsing deterministically. URL normalization and hashing are exact, not LLM-approximate. Claude receives clean JSON instead of raw XML.
 - **48-hour recency window.** The script drops items older than 48 hours before Claude sees them. Keeps context small and focused on what's new.
 - **JSON state, not SQLite.** Produces readable git diffs. One URL hash per line.
 - **URL hashes, not full URLs.** SHA-256 keeps the state file compact.
@@ -76,9 +76,16 @@ Configured in `config/feeds.yaml`.
 2. Set build watch paths to `content/**`, `layouts/**`, `static/**`, `hugo.toml`
 3. Create a Claude Code Routine pointed at this repo with a daily schedule
 4. Enable unrestricted branch pushes for the Routine
-5. In the Routine's cloud environment, add `pip install feedparser pyyaml` to the setup script
+5. In the Routine's cloud environment, add `pip install atoma pyyaml` to the setup script
 
 The Routine reads `CLAUDE.md` on each run for its full instructions.
+
+## Build Parameters
+
+A couple of Hugo site params can be set via environment variables at build time:
+
+- `HUGO_PARAMS_GITHUBREPO` — if set (e.g. `owner/repo`), renders a GitHub icon link in the header pointing to that repo. Omit to hide the link.
+- `HUGO_PARAMS_NOINDEX` — if set to `true`, emits a restrictive `robots.txt` and a `<meta name="robots" content="noindex, nofollow">` tag on every page. Use for builds that should stay out of search indexes.
 
 ## License
 
