@@ -1,0 +1,9 @@
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="site-title">{{ .Site.Title }}</a>
+    <p class="site-tagline">{{ .Site.Params.description }}</p>
+    {{ with .OutputFormats.Get "RSS" }}
+    <a href="{{ .Permalink }}" class="rss-link" title="RSS Feed">RSS</a>
+    {{ end }}
+  </div>
+</header>

@@ -1,0 +1,24 @@
+baseURL = "https://sorcerousmachine.com/ai-news-digest"
+languageCode = "en-us"
+title = "AI Digest"
+buildFuture = true
+
+[params]
+  description = "Daily AI industry digest. Automated collection and analysis."
+  author = "AI Digest Pipeline"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+
+[pagination]
+  pagerSize = 30
