@@ -239,6 +239,16 @@ li {
   border-color: var(--accent);
 }
 
+.header-link--icon {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xs);
+}
+
+.header-link--icon svg {
+  display: block;
+}
+
 
 /* ---- Digest List (Home Page) ---- */
 
