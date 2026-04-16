@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch and parse RSS/Atom feeds, output structured JSON.
 
-Reads config/feeds.yaml, fetches all feeds, parses with feedparser,
+Reads config/feeds.yaml, fetches all feeds, parses with atoma,
 normalizes URLs, computes SHA-256 dedup hashes, applies ArXiv keyword
 filtering, deduplicates against state/seen.json, and drops items older
 than 48 hours. Outputs only new, recent items as JSON to stdout.
@@ -14,20 +14,21 @@ import argparse
 import hashlib
 import json
 import sys
-import time
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+from urllib.request import Request, urlopen
+from urllib.error import URLError
 
-import feedparser
+import atoma
 import yaml
 
 TRACKING_PARAMS = {
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
     "ref", "source", "fbclid", "gclid",
 }
-REQUEST_HEADERS = {"User-Agent": "AIDigest/1.0"}
+USER_AGENT = "AIDigest/1.0"
 FETCH_TIMEOUT = 30
 MAX_AGE_HOURS = 48
 
@@ -37,7 +38,6 @@ def parse_published_date(date_str: str) -> datetime | None:
     if not date_str:
         return None
 
-    # feedparser's parsed time tuple
     # Try email-style dates first (RFC 2822, common in RSS)
     try:
         return parsedate_to_datetime(date_str)
@@ -62,13 +62,18 @@ def parse_published_date(date_str: str) -> datetime | None:
     return None
 
 
-def is_recent(date_str: str, cutoff: datetime) -> bool:
-    """Return True if the item's date is recent enough, or unparseable (keep it)."""
-    parsed = parse_published_date(date_str)
-    if parsed is None:
-        # Can't determine age — keep it rather than drop it
+def datetime_to_str(dt: datetime | None) -> str:
+    """Convert a datetime to an RFC 2822 string, or empty string if None."""
+    if dt is None:
+        return ""
+    return dt.strftime("%a, %d %b %Y %H:%M:%S %z").strip()
+
+
+def is_recent(published: datetime | None, cutoff: datetime) -> bool:
+    """Return True if the item's date is recent enough, or unknown (keep it)."""
+    if published is None:
         return True
-    return parsed >= cutoff
+    return published >= cutoff
 
 
 def load_seen(path: Path) -> dict[str, str]:
@@ -111,81 +116,87 @@ def hash_url(url: str) -> str:
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-def parse_feed_items(feed_data, feed_name: str, category: str) -> list[dict]:
-    """Extract items from a parsed feed."""
+def fetch_bytes(url: str) -> bytes:
+    """Fetch URL content as bytes."""
+    req = Request(url, headers={"User-Agent": USER_AGENT})
+    with urlopen(req, timeout=FETCH_TIMEOUT) as resp:
+        return resp.read()
+
+
+def parse_feed(data: bytes) -> tuple[list[dict], str]:
+    """Parse feed bytes, trying RSS then Atom. Returns (items, format)."""
+    try:
+        feed = atoma.parse_rss_bytes(data)
+        items = []
+        for item in feed.items:
+            link = item.link or (item.guid if item.guid else "")
+            title = (item.title or "").strip()
+            if not link or not title:
+                continue
+
+            published = item.pub_date
+            description = (item.description or "")[:500]
+
+            # Extract author
+            author = item.author or ""
+
+            items.append({
+                "title": title,
+                "link": link,
+                "published": published,
+                "description": description,
+                "author": author,
+            })
+        return items, "rss"
+    except atoma.FeedParseError:
+        pass
+
+    feed = atoma.parse_atom_bytes(data)
     items = []
-    for entry in feed_data.entries:
-        link = entry.get("link", "")
-        if not link:
-            continue
-
-        title = entry.get("title", "").strip()
-        if not title:
-            continue
-
-        # Extract published date
-        published = ""
-        for date_field in ("published", "updated", "created"):
-            if entry.get(date_field):
-                published = entry[date_field]
+    for entry in feed.entries:
+        # Atom entries can have multiple links; prefer rel="alternate"
+        link = ""
+        for lnk in (entry.links or []):
+            if lnk.rel in (None, "alternate"):
+                link = lnk.href or ""
                 break
+        if not link and entry.links:
+            link = entry.links[0].href or ""
+        if not link and entry.id_:
+            link = entry.id_
 
-        # Extract description/summary, truncate to 500 chars
+        title = (entry.title.value if entry.title else "").strip()
+        if not link or not title:
+            continue
+
+        published = entry.published or entry.updated
+
+        # Atom summary/content
         description = ""
-        for desc_field in ("summary", "description", "content"):
-            val = entry.get(desc_field)
-            if isinstance(val, list) and val:
-                val = val[0].get("value", "")
-            if val:
-                description = str(val)[:500]
-                break
+        if entry.summary and entry.summary.value:
+            description = entry.summary.value[:500]
+        elif entry.content and entry.content.value:
+            description = entry.content.value[:500]
 
-        # Extract authors for ArXiv papers
-        authors = ""
-        if entry.get("authors"):
-            authors = ", ".join(
-                a.get("name", "") for a in entry["authors"] if a.get("name")
-            )
-        elif entry.get("author"):
-            authors = entry["author"]
-
-        url_hash = hash_url(link)
+        # Authors
+        author = ""
+        if entry.authors:
+            author = ", ".join(a.name for a in entry.authors if a.name)
 
         items.append({
             "title": title,
-            "url": link,
-            "url_hash": url_hash,
+            "link": link,
             "published": published,
             "description": description,
-            "authors": authors,
-            "source": feed_name,
-            "category": category,
+            "author": author,
         })
-
-    return items
+    return items, "atom"
 
 
 def matches_keywords(title: str, keywords: list[str]) -> list[str]:
     """Return list of keywords that match the title (case-insensitive)."""
     title_lower = title.lower()
     return [kw for kw in keywords if kw.lower() in title_lower]
-
-
-def fetch_feed(url: str) -> tuple[feedparser.FeedParserDict | None, str | None]:
-    """Fetch and parse a single feed. Returns (feed_data, error)."""
-    try:
-        feed = feedparser.parse(
-            url,
-            request_headers=REQUEST_HEADERS,
-        )
-        if feed.bozo and not feed.entries:
-            return None, f"Parse error: {feed.bozo_exception}"
-        if feed.bozo and feed.entries:
-            # Partial parse — usable but worth logging
-            return feed, f"Warning: {feed.bozo_exception} ({len(feed.entries)} entries recovered)"
-        return feed, None
-    except Exception as e:
-        return None, str(e)
 
 
 def main():
@@ -231,24 +242,41 @@ def main():
         url = feed_cfg["url"]
         category = feed_cfg.get("category", "other")
 
-        feed_data, msg = fetch_feed(url)
-        if msg and feed_data is None:
-            result["errors"].append({"feed": name, "url": url, "error": msg})
+        try:
+            data = fetch_bytes(url)
+            items, fmt = parse_feed(data)
+        except (URLError, OSError) as e:
+            result["errors"].append({"feed": name, "url": url, "error": f"Fetch error: {e}"})
             continue
-        if msg:
-            result["warnings"].append({"feed": name, "url": url, "warning": msg})
+        except (atoma.FeedParseError, Exception) as e:
+            result["errors"].append({"feed": name, "url": url, "error": f"Parse error: {e}"})
+            continue
 
-        items = parse_feed_items(feed_data, name, category)
-        all_feed_items.extend(items)
+        for item in items:
+            url_hash = hash_url(item["link"])
+            published_str = datetime_to_str(item["published"])
+            all_feed_items.append({
+                "title": item["title"],
+                "url": item["link"],
+                "url_hash": url_hash,
+                "published": published_str,
+                "description": item["description"],
+                "authors": item["author"],
+                "source": name,
+                "category": category,
+                "_published_dt": item["published"],
+            })
 
     # Filter: drop already-seen and older than 48 hours
     for item in all_feed_items:
         if item["url_hash"] in seen:
             skipped_seen += 1
             continue
-        if not is_recent(item["published"], cutoff):
+        if not is_recent(item["_published_dt"], cutoff):
             skipped_old += 1
             continue
+        # Remove internal field before output
+        del item["_published_dt"]
         result["feeds"].append(item)
 
     # Fetch ArXiv feeds with keyword filtering
@@ -259,18 +287,18 @@ def main():
     for url in arxiv_cfg.get("feeds", []):
         feed_name = url.split("/")[-1] if "/" in url else url
 
-        feed_data, msg = fetch_feed(url)
-        if msg and feed_data is None:
-            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": msg})
+        try:
+            data = fetch_bytes(url)
+            items, fmt = parse_feed(data)
+        except (URLError, OSError) as e:
+            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": f"Fetch error: {e}"})
             continue
-        if msg:
-            result["warnings"].append({"feed": f"arxiv:{feed_name}", "url": url, "warning": msg})
+        except (atoma.FeedParseError, Exception) as e:
+            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": f"Parse error: {e}"})
+            continue
 
-        for entry in feed_data.entries:
-            link = entry.get("link", "")
-            title = entry.get("title", "").strip()
-            if not link or not title:
-                continue
+        for item in items:
+            title = item["title"]
 
             # Apply keyword filtering
             high_matches = matches_keywords(title, high_signal)
@@ -288,41 +316,20 @@ def main():
             if not passed:
                 continue
 
-            # Extract abstract/summary
-            abstract = ""
-            for desc_field in ("summary", "description"):
-                val = entry.get(desc_field)
-                if val:
-                    abstract = str(val)
-                    break
-
-            authors = ""
-            if entry.get("authors"):
-                authors = ", ".join(
-                    a.get("name", "") for a in entry["authors"] if a.get("name")
-                )
-            elif entry.get("author"):
-                authors = entry["author"]
-
-            # Extract published date
-            published = ""
-            for date_field in ("published", "updated", "created"):
-                if entry.get(date_field):
-                    published = entry[date_field]
-                    break
-
-            url_hash = hash_url(link)
+            url_hash = hash_url(item["link"])
+            published_str = datetime_to_str(item["published"])
 
             all_arxiv_items.append({
                 "title": title,
-                "url": link,
+                "url": item["link"],
                 "url_hash": url_hash,
-                "published": published,
-                "authors": authors,
-                "abstract": abstract,
+                "published": published_str,
+                "authors": item["author"],
+                "abstract": item["description"],
                 "matched_keywords": matched_keywords,
                 "source": f"arxiv:{feed_name}",
                 "category": "research",
+                "_published_dt": item["published"],
             })
 
     # Filter ArXiv: drop already-seen and older than 48 hours
@@ -330,9 +337,10 @@ def main():
         if item["url_hash"] in seen:
             skipped_seen += 1
             continue
-        if not is_recent(item["published"], cutoff):
+        if not is_recent(item["_published_dt"], cutoff):
             skipped_old += 1
             continue
+        del item["_published_dt"]
         result["arxiv"].append(item)
 
     # Summary counts
