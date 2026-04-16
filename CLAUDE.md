@@ -26,12 +26,13 @@ If `state/seen.json` does not exist or is empty, treat it as `{"seen": {}}`.
 Run the feed fetcher script:
 
 ```bash
-python3 scripts/fetch_feeds.py --config config/feeds.yaml
+python3 scripts/fetch_feeds.py --config config/feeds.yaml --state state/seen.json
 ```
 
 This script handles all feed fetching, XML parsing, URL normalization,
-SHA-256 hashing, and ArXiv keyword filtering. It outputs a JSON object
-to stdout with this structure:
+SHA-256 hashing, ArXiv keyword filtering, deduplication against
+seen.json, and 48-hour recency filtering. It outputs **only new,
+recent items** as a JSON object to stdout:
 
 ```json
 {
@@ -65,11 +66,17 @@ to stdout with this structure:
   "summary": {
     "feeds_attempted": 14,
     "feeds_failed": 0,
-    "feed_items": 85,
-    "arxiv_items_passed_filter": 12
+    "total_fetched": 2159,
+    "skipped_already_seen": 1800,
+    "skipped_too_old": 300,
+    "new_feed_items": 47,
+    "new_arxiv_items": 12
   }
 }
 ```
+
+All items in `feeds` and `arxiv` are already deduplicated and recent.
+You do not need to check them against seen.json again.
 
 Save the full JSON output. You will need it for subsequent steps.
 
@@ -102,25 +109,25 @@ Run 3-5 targeted web searches with specific queries like:
 For each significant finding, record: title, URL, a 2-3 sentence summary
 of why it matters, and a category.
 
-For each web-discovered item, compute a URL hash for deduplication:
+Do NOT include: routine product updates, opinion pieces, rumors, or
+content older than 48 hours.
+
+## Step 4: Deduplicate Web Discoveries
+
+Feed and ArXiv items from Step 2 are already deduplicated by the script.
+
+For web-discovered items from Step 3, check each URL hash against
+`state/seen.json`:
 ```bash
 python3 -c "from scripts.fetch_feeds import hash_url; print(hash_url('THE_URL'))"
 ```
 
-Do NOT include: routine product updates, opinion pieces, rumors, or
-content older than 48 hours.
-
-## Step 4: Deduplicate
-
-For every item collected in Steps 2-3, check its URL hash against the
-`seen` object from state/seen.json. Feed items already have `url_hash`
-from the script output. Web-discovered items need hashing as shown above.
-
 - If the hash exists in `seen`: skip the item (already ingested)
 - If the hash does not exist: keep the item as new
 
-If no new items exist after deduplication, create a short commit noting
-"no new items for {date}", push, and exit. Do not create a digest post.
+If no new items exist from any source after deduplication, create a
+short commit noting "no new items for {date}", push, and exit. Do not
+create a digest post.
 
 ## Step 5: Triage ArXiv Papers
 

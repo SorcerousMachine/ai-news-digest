@@ -2,11 +2,12 @@
 """Fetch and parse RSS/Atom feeds, output structured JSON.
 
 Reads config/feeds.yaml, fetches all feeds, parses with feedparser,
-normalizes URLs, computes SHA-256 dedup hashes, and applies ArXiv
-keyword filtering. Outputs JSON to stdout for Claude to consume.
+normalizes URLs, computes SHA-256 dedup hashes, applies ArXiv keyword
+filtering, deduplicates against state/seen.json, and drops items older
+than 48 hours. Outputs only new, recent items as JSON to stdout.
 
 Usage:
-    python3 scripts/fetch_feeds.py [--config config/feeds.yaml]
+    python3 scripts/fetch_feeds.py [--config config/feeds.yaml] [--state state/seen.json]
 """
 
 import argparse
@@ -14,6 +15,8 @@ import hashlib
 import json
 import sys
 import time
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
@@ -26,6 +29,57 @@ TRACKING_PARAMS = {
 }
 REQUEST_HEADERS = {"User-Agent": "AIDigest/1.0"}
 FETCH_TIMEOUT = 30
+MAX_AGE_HOURS = 48
+
+
+def parse_published_date(date_str: str) -> datetime | None:
+    """Try to parse a published date string into a timezone-aware datetime."""
+    if not date_str:
+        return None
+
+    # feedparser's parsed time tuple
+    # Try email-style dates first (RFC 2822, common in RSS)
+    try:
+        return parsedate_to_datetime(date_str)
+    except (ValueError, TypeError):
+        pass
+
+    # Try ISO 8601 formats
+    for fmt in (
+        "%Y-%m-%dT%H:%M:%S%z",
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d",
+    ):
+        try:
+            dt = datetime.strptime(date_str, fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt
+        except ValueError:
+            continue
+
+    return None
+
+
+def is_recent(date_str: str, cutoff: datetime) -> bool:
+    """Return True if the item's date is recent enough, or unparseable (keep it)."""
+    parsed = parse_published_date(date_str)
+    if parsed is None:
+        # Can't determine age — keep it rather than drop it
+        return True
+    return parsed >= cutoff
+
+
+def load_seen(path: Path) -> dict[str, str]:
+    """Load seen.json, returning the 'seen' dict. Empty dict if missing."""
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text())
+        return data.get("seen", {})
+    except (json.JSONDecodeError, KeyError):
+        return {}
 
 
 def normalize_url(url: str) -> str:
@@ -138,6 +192,11 @@ def main():
         default="config/feeds.yaml",
         help="Path to feeds config file",
     )
+    parser.add_argument(
+        "--state",
+        default="state/seen.json",
+        help="Path to seen.json state file for deduplication",
+    )
     args = parser.parse_args()
 
     config_path = Path(args.config)
@@ -148,11 +207,19 @@ def main():
     with open(config_path) as f:
         config = yaml.safe_load(f)
 
+    seen = load_seen(Path(args.state))
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=MAX_AGE_HOURS)
+
     result = {
         "feeds": [],
         "arxiv": [],
         "errors": [],
     }
+
+    all_feed_items = []
+    all_arxiv_items = []
+    skipped_seen = 0
+    skipped_old = 0
 
     # Fetch regular feeds
     for feed_cfg in config.get("feeds", []):
@@ -166,7 +233,17 @@ def main():
             continue
 
         items = parse_feed_items(feed_data, name, category)
-        result["feeds"].extend(items)
+        all_feed_items.extend(items)
+
+    # Filter: drop already-seen and older than 48 hours
+    for item in all_feed_items:
+        if item["url_hash"] in seen:
+            skipped_seen += 1
+            continue
+        if not is_recent(item["published"], cutoff):
+            skipped_old += 1
+            continue
+        result["feeds"].append(item)
 
     # Fetch ArXiv feeds with keyword filtering
     arxiv_cfg = config.get("arxiv", {})
@@ -219,12 +296,20 @@ def main():
             elif entry.get("author"):
                 authors = entry["author"]
 
+            # Extract published date
+            published = ""
+            for date_field in ("published", "updated", "created"):
+                if entry.get(date_field):
+                    published = entry[date_field]
+                    break
+
             url_hash = hash_url(link)
 
-            result["arxiv"].append({
+            all_arxiv_items.append({
                 "title": title,
                 "url": link,
                 "url_hash": url_hash,
+                "published": published,
                 "authors": authors,
                 "abstract": abstract,
                 "matched_keywords": matched_keywords,
@@ -232,12 +317,25 @@ def main():
                 "category": "research",
             })
 
+    # Filter ArXiv: drop already-seen and older than 48 hours
+    for item in all_arxiv_items:
+        if item["url_hash"] in seen:
+            skipped_seen += 1
+            continue
+        if not is_recent(item["published"], cutoff):
+            skipped_old += 1
+            continue
+        result["arxiv"].append(item)
+
     # Summary counts
     result["summary"] = {
         "feeds_attempted": len(config.get("feeds", [])) + len(arxiv_cfg.get("feeds", [])),
         "feeds_failed": len(result["errors"]),
-        "feed_items": len(result["feeds"]),
-        "arxiv_items_passed_filter": len(result["arxiv"]),
+        "total_fetched": len(all_feed_items) + len(all_arxiv_items),
+        "skipped_already_seen": skipped_seen,
+        "skipped_too_old": skipped_old,
+        "new_feed_items": len(result["feeds"]),
+        "new_arxiv_items": len(result["arxiv"]),
     }
 
     json.dump(result, sys.stdout, indent=2, ensure_ascii=False)
