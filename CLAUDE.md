@@ -218,6 +218,10 @@ Format the JSON with 2-space indentation for readable git diffs.
 
 ## Step 9: Commit and Push
 
+IMPORTANT: You MUST commit and push directly to the `main` branch.
+Do NOT create a new branch. Do NOT push to a `claude/` prefixed branch.
+Cloudflare Pages deploys from `main` — any other branch will not deploy.
+
 Stage all changes:
 ```bash
 git add content/posts/ state/seen.json
@@ -231,10 +235,10 @@ git diff --cached --quiet
 If nothing is staged, exit cleanly (this happens if all items were
 duplicates and state didn't change).
 
-If changes exist, commit and push:
+If changes exist, commit and push directly to main:
 ```bash
 git commit -m "digest: {YYYY-MM-DD}"
-git push origin main
+git push origin HEAD:main
 ```
 
 If the push fails (e.g., another process pushed in the meantime), do
