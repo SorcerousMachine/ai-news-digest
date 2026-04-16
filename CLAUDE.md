@@ -241,6 +241,26 @@ If the push fails (e.g., another process pushed in the meantime), do
 NOT retry. Log the error. The digest file is in the working tree and
 can be recovered from the session.
 
+## Step 10: Send Notification
+
+After a successful commit and push, send a summary notification to ntfy.sh:
+
+```bash
+curl -s \
+  -H "Title: AI Digest — {Month Day, Year}" \
+  -H "Tags: newspaper" \
+  -H "Click: https://sorcerousmachine.com/posts/{YYYY-MM-DD}/" \
+  -d "{executive summary from the digest}" \
+  https://ntfy.sh/ai-news-digest
+```
+
+The message body should be the 2-3 sentence executive summary from
+Step 6. Plain text only, no markdown.
+
+If the push failed in Step 9, do NOT send the notification.
+If the notification fails, log the error but do not retry — this
+is informational, not critical.
+
 ## Important Constraints
 
 - Never combine multiple days into one digest. One run = one date.
