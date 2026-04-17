@@ -13,14 +13,18 @@ Usage:
 import argparse
 import hashlib
 import json
+import random
 import re
+import socket
 import sys
+import time
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from urllib.request import Request, urlopen
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 
 import atoma
 import yaml
@@ -29,10 +33,14 @@ TRACKING_PARAMS = {
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
     "ref", "source", "fbclid", "gclid",
 }
-USER_AGENT = "AIDigest/1.0"
+USER_AGENT = "Mozilla/5.0 (compatible; AIDigestBot/1.0; +https://digest.sorcerousmachine.com)"
 FETCH_TIMEOUT = 30
 MAX_AGE_HOURS = 48
 THIN_DESCRIPTION_THRESHOLD = 200
+INTER_FETCH_JITTER_RANGE = (0.2, 0.5)
+RETRY_BACKOFF_BASE = 2.0
+RETRY_BACKOFF_JITTER = 1.0
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 
 def visible_text_length(text: str) -> int:
@@ -126,11 +134,42 @@ def hash_url(url: str) -> str:
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-def fetch_bytes(url: str) -> bytes:
-    """Fetch URL content as bytes."""
-    req = Request(url, headers={"User-Agent": USER_AGENT})
+def classify_fetch_error(exc: Exception) -> str:
+    """Bucket a fetch/parse exception into a stable category string."""
+    if isinstance(exc, atoma.FeedParseError):
+        return "parse_error"
+    if isinstance(exc, HTTPError):
+        return f"status:{exc.code}"
+    if isinstance(exc, (socket.timeout, TimeoutError)):
+        return "timeout"
+    if isinstance(exc, URLError):
+        reason = getattr(exc, "reason", None)
+        if isinstance(reason, (socket.timeout, TimeoutError)):
+            return "timeout"
+        return "network"
+    if isinstance(exc, OSError):
+        return "network"
+    return "other"
+
+
+def _single_fetch(req: Request) -> bytes:
     with urlopen(req, timeout=FETCH_TIMEOUT) as resp:
         return resp.read()
+
+
+def fetch_bytes(url: str) -> bytes:
+    """Fetch URL content as bytes. Retries once on 5xx/429/timeouts/network errors."""
+    req = Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        return _single_fetch(req)
+    except HTTPError as e:
+        if e.code not in RETRYABLE_STATUS_CODES:
+            raise
+    except (URLError, socket.timeout, TimeoutError, OSError):
+        pass
+
+    time.sleep(RETRY_BACKOFF_BASE + random.uniform(0, RETRY_BACKOFF_JITTER))
+    return _single_fetch(req)
 
 
 def parse_feed(data: bytes) -> tuple[list[dict], str]:
@@ -252,14 +291,28 @@ def main():
         url = feed_cfg["url"]
         category = feed_cfg.get("category", "other")
 
+        time.sleep(random.uniform(*INTER_FETCH_JITTER_RANGE))
+
         try:
             data = fetch_bytes(url)
-            items, fmt = parse_feed(data)
-        except (URLError, OSError) as e:
-            result["errors"].append({"feed": name, "url": url, "error": f"Fetch error: {e}"})
+        except (HTTPError, URLError, socket.timeout, TimeoutError, OSError) as e:
+            result["errors"].append({
+                "feed": name,
+                "url": url,
+                "type": classify_fetch_error(e),
+                "error": str(e)[:200],
+            })
             continue
-        except (atoma.FeedParseError, Exception) as e:
-            result["errors"].append({"feed": name, "url": url, "error": f"Parse error: {e}"})
+
+        try:
+            items, fmt = parse_feed(data)
+        except atoma.FeedParseError as e:
+            result["errors"].append({
+                "feed": name,
+                "url": url,
+                "type": "parse_error",
+                "error": str(e)[:200],
+            })
             continue
 
         for item in items:
@@ -298,15 +351,30 @@ def main():
 
     for url in arxiv_cfg.get("feeds", []):
         feed_name = url.split("/")[-1] if "/" in url else url
+        arxiv_source = f"arxiv:{feed_name}"
+
+        time.sleep(random.uniform(*INTER_FETCH_JITTER_RANGE))
 
         try:
             data = fetch_bytes(url)
-            items, fmt = parse_feed(data)
-        except (URLError, OSError) as e:
-            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": f"Fetch error: {e}"})
+        except (HTTPError, URLError, socket.timeout, TimeoutError, OSError) as e:
+            result["errors"].append({
+                "feed": arxiv_source,
+                "url": url,
+                "type": classify_fetch_error(e),
+                "error": str(e)[:200],
+            })
             continue
-        except (atoma.FeedParseError, Exception) as e:
-            result["errors"].append({"feed": f"arxiv:{feed_name}", "url": url, "error": f"Parse error: {e}"})
+
+        try:
+            items, fmt = parse_feed(data)
+        except atoma.FeedParseError as e:
+            result["errors"].append({
+                "feed": arxiv_source,
+                "url": url,
+                "type": "parse_error",
+                "error": str(e)[:200],
+            })
             continue
 
         for item in items:
@@ -356,9 +424,11 @@ def main():
         result["arxiv"].append(item)
 
     # Summary counts
+    error_types = Counter(e.get("type", "other") for e in result["errors"])
     result["summary"] = {
         "feeds_attempted": len(config.get("feeds", [])) + len(arxiv_cfg.get("feeds", [])),
         "feeds_failed": len(result["errors"]),
+        "error_types": dict(error_types),
         "total_fetched": len(all_feed_items) + len(all_arxiv_items),
         "skipped_already_seen": skipped_seen,
         "skipped_too_old": skipped_old,

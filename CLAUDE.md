@@ -62,11 +62,12 @@ recent items** as a JSON object to stdout:
     }
   ],
   "errors": [
-    {"feed": "...", "url": "...", "error": "..."}
+    {"feed": "...", "url": "...", "type": "status:403", "error": "..."}
   ],
   "summary": {
     "feeds_attempted": 14,
     "feeds_failed": 0,
+    "error_types": {"status:403": 2, "timeout": 1, "parse_error": 0},
     "total_fetched": 2159,
     "skipped_already_seen": 1800,
     "skipped_too_old": 300,
@@ -87,8 +88,11 @@ Save the full JSON output. You will need it for subsequent steps.
 
 If the script fails entirely, log the error and continue to Step 3
 (web discovery) so the digest still has content. If it succeeds but
-`errors` is non-empty, note the failed feeds — include them in the
-commit message so feed rot is visible.
+`errors` is non-empty, note the failed feeds in the commit message so
+feed rot is visible. Group them by `type` (e.g., `status:403`,
+`timeout`, `parse_error`) using the `error_types` breakdown in
+`summary` — this makes persistent blockers distinguishable from
+transient blips run-over-run.
 
 ## Step 3: Web Discovery
 
