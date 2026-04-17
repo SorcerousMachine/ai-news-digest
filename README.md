@@ -29,8 +29,8 @@ Daily scheduled run
 
 ## Subscribe
 
-- **Web:** [sorcerousmachine.com](https://sorcerousmachine.com)
-- **RSS:** [sorcerousmachine.com/feed.xml](https://sorcerousmachine.com/feed.xml)
+- **Web:** [digest.sorcerousmachine.com](https://digest.sorcerousmachine.com)
+- **RSS:** [digest.sorcerousmachine.com/feed.xml](https://digest.sorcerousmachine.com/feed.xml)
 - **Notifications:** [ntfy.sh/ai-news-digest](https://ntfy.sh/ai-news-digest)
 
 ## Repository Structure
