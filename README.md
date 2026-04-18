@@ -1,30 +1,41 @@
 # AI News Digest
 
-Automated daily AI industry digest. A Claude Code Routine clones this repo each morning, runs a Python script to fetch and filter RSS feeds, uses web search for additional coverage, synthesizes a digest post, commits, and pushes. Cloudflare Pages auto-deploys on push. A summary notification goes out via ntfy.sh.
+Automated daily AI industry digest. A cron job on a self-hosted machine
+invokes headless Claude Code each morning: a Python script fetches and
+filters RSS feeds, Claude does web discovery for additional coverage,
+synthesizes the digest as Hugo markdown, commits, and pushes. Cloudflare
+Pages auto-deploys on push. A summary notification goes out via ntfy.sh.
 
-No server. No application code to maintain. The pipeline is a Routine prompt backed by a feed script, repo-committed config, and state.
+No server-side application to maintain. The pipeline is a set of
+instructions in `CLAUDE.md`, backed by a feed-fetcher script and
+repo-committed config and state.
 
 ## How It Works
 
 ```
-Daily scheduled run
-  -> Routine clones this repo
-  -> Runs scripts/fetch_feeds.py
-     -> Fetches 33 RSS/Atom feeds + 3 ArXiv feeds
-     -> Parses XML, normalizes URLs, computes SHA-256 hashes
-     -> Filters ArXiv papers by keyword relevance
-     -> Deduplicates against state/seen.json
-     -> Drops items older than 48 hours
-     -> Outputs structured JSON (new items only)
-  -> Routine searches the web for additional AI news
-  -> Triages ArXiv papers by significance
-  -> Synthesizes a daily digest as Hugo markdown
-  -> Writes content/posts/{YYYY-MM-DD}.md
-  -> Updates state/seen.json with new URL hashes
-  -> Prunes state entries older than 90 days
-  -> Commits and pushes to main
+Daily cron invocation (11:00 UTC)
+  -> Wrapper script pulls latest main
+  -> Invokes `claude -p` headless, pointed at CLAUDE.md
+     -> Step 1-2: Runs scripts/fetch_feeds.py
+        -> Fetches 33 RSS/Atom feeds + 3 ArXiv feeds with per-fetch jitter
+        -> Retries once on 5xx/429/timeouts; identifies as a named bot
+        -> Detects stale feed URLs (200 OK + HTML body)
+        -> Classifies errors by type (status:*, timeout, stale_url, parse_error)
+        -> Normalizes URLs, SHA-256 hashes, filters ArXiv by keywords
+        -> Deduplicates against state/seen.json
+        -> Tracks per-feed consecutive-failure counts in feed_health
+        -> Drops items older than 48 hours
+        -> Emits structured JSON + disable_candidates list
+     -> Step 3-4: Web discovery (+ passive feed-candidate capture)
+     -> Step 5: Triages ArXiv papers by significance
+     -> Step 6-7: Synthesizes digest, writes content/posts/{YYYY-MM-DD}.md
+     -> Step 8: Post-write semantic dedup against last 3 digests
+     -> Step 9: Retires feeds past the hard-failure threshold into a
+                disabled: section of config/feeds.yaml
+     -> Step 10: Updates state/seen.json (seen hashes + feed_health)
+     -> Step 11: Commits + pushes to main, recovery-branch fallback
+     -> Step 12: Sends summary to ntfy.sh
   -> Cloudflare Pages builds Hugo and deploys
-  -> Sends summary notification to ntfy.sh
 ```
 
 ## Subscribe
@@ -36,14 +47,14 @@ Daily scheduled run
 ## Repository Structure
 
 ```
-scripts/fetch_feeds.py     # Feed fetcher: RSS parsing, dedup, filtering
-config/feeds.yaml          # 33 RSS/Atom feeds + 3 ArXiv feeds, 7 categories
-state/seen.json            # Dedup state (URL hashes + dates)
+scripts/fetch_feeds.py     # Feed fetcher: RSS parsing, dedup, filtering, health tracking
+config/feeds.yaml          # Active feeds + disabled: section for retired entries
+state/seen.json            # Dedup state (URL hashes) + per-feed health
 content/posts/             # Generated digest posts (Hugo markdown)
 layouts/                   # Hugo templates
 static/css/style.css       # Site styles
 hugo.toml                  # Hugo configuration
-CLAUDE.md                  # Detailed pipeline instructions for the Routine
+CLAUDE.md                  # Pipeline instructions loaded by each run
 ```
 
 ## Feed Sources
@@ -58,34 +69,102 @@ CLAUDE.md                  # Detailed pipeline instructions for the Routine
 - **Regulatory** -- Stanford HAI, NIST
 - **Infrastructure** -- NVIDIA, Semiconductor Engineering, AWS ML
 
-Configured in `config/feeds.yaml`.
+Configured in `config/feeds.yaml`. Feeds that produce two consecutive
+hard failures (404, 410, or HTML-served-where-XML-expected) are moved
+to a `disabled:` section of the same file with a reason and date, and
+are skipped on subsequent runs. Manual re-enable by moving the entry
+back into the active list.
 
 ## Architecture Decisions
 
-- **Python for feed processing.** atoma (pure-Python, defusedxml-based) handles RSS/Atom parsing deterministically. URL normalization and hashing are exact, not LLM-approximate. Claude receives clean JSON instead of raw XML.
-- **48-hour recency window.** The script drops items older than 48 hours before Claude sees them. Keeps context small and focused on what's new.
-- **JSON state, not SQLite.** Produces readable git diffs. One URL hash per line.
+- **Python for feed processing.** atoma (pure-Python, defusedxml-based)
+  handles RSS/Atom parsing deterministically. URL normalization and
+  hashing are exact, not LLM-approximate. Claude receives clean JSON
+  instead of raw XML.
+- **48-hour recency window.** The script drops items older than 48
+  hours before Claude sees them. Keeps context small and focused on
+  what's new.
+- **JSON state, not SQLite.** Produces readable git diffs. One URL
+  hash per line.
 - **URL hashes, not full URLs.** SHA-256 keeps the state file compact.
-- **90-day retention.** Caps state at ~5,000-9,000 entries. Pruned each run.
+- **90-day retention.** Caps state at ~5,000-9,000 entries. Pruned
+  each run.
+- **Per-feed health tracking with auto-retirement.** Hard failures
+  (status:404, status:410, stale_url) increment a consecutive-failure
+  counter; soft failures (5xx, timeouts, parse errors on XML-ish
+  bodies) preserve it. Two consecutive hard failures retires the feed
+  automatically. Prevents the error log from being dominated by feeds
+  that have permanently moved or gone dark.
+- **Post-write semantic deduplication.** URL-hash dedup can't catch
+  the same story surfaced from a different URL day-to-day. After the
+  digest is written, Claude reads the last three digests and removes
+  items that cover stories already reported — keeping the synthesis
+  context clean of prior-post bias.
+- **Passive feed discovery.** During web search, recurring authors
+  and publishers not already in feeds.yaml are surfaced as candidates
+  in the commit message for manual review. No auto-addition — web
+  search ranks for traffic, not insight, so the curation stays human.
 - **No theme dependency.** Templates are self-contained in `layouts/`.
 - **No JavaScript.** CSS-only. Progressive enhancement only.
 
 ## Setup
 
-1. Connect this repo to Cloudflare Pages (framework: Hugo, output: `public`, env var `HUGO_VERSION=0.147.0`)
-2. Set build watch paths to `content/**`, `layouts/**`, `static/**`, `hugo.toml`
-3. Create a Claude Code Routine pointed at this repo with a daily schedule
-4. Enable unrestricted branch pushes for the Routine
-5. In the Routine's cloud environment, add `pip install atoma pyyaml` to the setup script
+Two parts: Cloudflare Pages for hosting, and a cron job on a machine
+you control for the daily pipeline. No part of the pipeline runs in
+a managed service — anything that can run `claude` and `git` on a
+schedule will do.
 
-The Routine reads `CLAUDE.md` on each run for its full instructions.
+### Hosting (Cloudflare Pages)
+
+1. Connect this repo to Cloudflare Pages. Framework: Hugo. Output
+   directory: `public`. Set `HUGO_VERSION=0.147.0` as a build env var.
+2. Set build watch paths to `content/**`, `layouts/**`, `static/**`,
+   `hugo.toml` — config and state changes shouldn't trigger rebuilds.
+3. Point a custom domain at the Pages project.
+
+### Pipeline (cron)
+
+Requirements: a long-running host (small VPS or homelab machine) with
+git, Python 3.10+, and network access to GitHub + Anthropic + RSS
+origins.
+
+1. Install the Claude Code CLI and log in — this creates
+   `~/.claude/.credentials.json`.
+2. Install `gh` (GitHub CLI), authenticate with `repo` scope, and
+   enable the git credential helper so pushes work over HTTPS.
+3. `pip install atoma pyyaml` (use `--user` or a venv depending on
+   your distribution's Python policy).
+4. Clone this repo locally.
+5. Write a wrapper script that `cd`s into the repo, pulls, and
+   invokes:
+   ```
+   claude -p --permission-mode bypassPermissions \
+     "Run the daily AI digest pipeline per CLAUDE.md. Follow every step in order."
+   ```
+   Redirect stdout+stderr to a per-day log file so stream interruptions
+   are visible after the fact.
+6. Add to crontab with `TZ=UTC`:
+   ```
+   0 11 * * * /path/to/wrapper.sh
+   ```
+   11:00 UTC lands after ArXiv's nightly update and before most US
+   readers wake up.
+
+Claude loads `CLAUDE.md` at the start of each run for its full
+pipeline spec.
 
 ## Build Parameters
 
-A couple of Hugo site params can be set via environment variables at build time:
+A couple of Hugo site params can be set via environment variables at
+build time:
 
-- `HUGO_PARAMS_GITHUBREPO` — if set (e.g. `owner/repo`), renders a GitHub icon link in the header pointing to that repo. Omit to hide the link.
-- `HUGO_PARAMS_NOINDEX` — if set to `true`, emits a restrictive `robots.txt` and a `<meta name="robots" content="noindex, nofollow">` tag on every page. Use for builds that should stay out of search indexes.
+- `HUGO_PARAMS_GITHUBREPO` — if set (e.g. `owner/repo`), renders a
+  GitHub icon link in the header pointing to that repo. Omit to hide
+  the link.
+- `HUGO_PARAMS_NOINDEX` — if set to `true`, emits a restrictive
+  `robots.txt` and a `<meta name="robots" content="noindex, nofollow">`
+  tag on every page. Use for builds that should stay out of search
+  indexes.
 
 ## License
 
