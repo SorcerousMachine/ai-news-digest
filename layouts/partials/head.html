@@ -36,6 +36,21 @@
   "publisher" $publisher
 }}
 <script type="application/ld+json">{{ $blog | jsonify }}</script>
+{{ if $.IsPage }}
+{{ $article := dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" $.Title
+  "description" (default $.Site.Params.description $.Params.summary)
+  "datePublished" ($.Date.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" ($.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+  "author" $publisher
+  "publisher" $publisher
+  "url" $.Permalink
+  "mainEntityOfPage" $.Permalink
+}}
+<script type="application/ld+json">{{ $article | jsonify }}</script>
+{{ end }}
 {{ end }}
 
 <!-- Styles (includes self-hosted font @font-face rules) -->
