@@ -130,7 +130,7 @@ and `content_mismatch` (HTTP 200 where the response body does not match
 the expected feed format — today that means an HTML body where XML was
 expected). Soft failures (5xx,
 timeouts, network, parse_error) do not increment the counter. After
-two consecutive hard failures a feed appears in `disable_candidates`;
+three consecutive hard failures a feed appears in `disable_candidates`;
 Step 9 moves those feeds out of the active list in `config/feeds.yaml`
 so tomorrow's run does not waste attempts on them.
 

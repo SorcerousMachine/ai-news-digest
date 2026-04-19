@@ -69,7 +69,7 @@ CLAUDE.md                  # Pipeline instructions loaded by each run
 - **Regulatory** -- Stanford HAI, NIST
 - **Infrastructure** -- NVIDIA, Semiconductor Engineering, AWS ML
 
-Configured in `config/feeds.yaml`. Feeds that produce two consecutive
+Configured in `config/feeds.yaml`. Feeds that produce three consecutive
 hard failures (404, 410, or content_mismatch — currently detected as
 HTML-served-where-XML-expected) are moved
 to a `disabled:` section of the same file with a reason and date, and
@@ -93,7 +93,7 @@ back into the active list.
 - **Per-feed health tracking with auto-retirement.** Hard failures
   (status:404, status:410, content_mismatch) increment a consecutive-failure
   counter; soft failures (5xx, timeouts, parse errors on XML-ish
-  bodies) preserve it. Two consecutive hard failures retires the feed
+  bodies) preserve it. Three consecutive hard failures retires the feed
   automatically. Prevents the error log from being dominated by feeds
   that have permanently moved or gone dark.
 - **Post-write semantic deduplication.** URL-hash dedup can't catch

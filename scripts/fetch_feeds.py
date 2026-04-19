@@ -42,7 +42,7 @@ RETRY_BACKOFF_BASE = 2.0
 RETRY_BACKOFF_JITTER = 1.0
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 HARD_FAILURE_TYPES = frozenset({"status:404", "status:410", "content_mismatch"})
-DISABLE_THRESHOLD = 2
+DISABLE_THRESHOLD = 3
 
 
 def visible_text_length(text: str) -> int:
