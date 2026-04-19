@@ -168,11 +168,15 @@ build time:
   tag on every page. Use for builds that should stay out of search
   indexes.
 - `HUGO_PARAMS_BUILTBY` — if set to an organization or individual name
-  (e.g. `Acme Corp`), renders a "Built by {name}." line in the footer.
-  Omit to hide the attribution.
+  (e.g. `Acme Corp`), renders a "Built by {name}." line in the footer
+  and emits schema.org JSON-LD marking the site as a `Blog` published
+  by that `Organization`. Search engines pick up the parent/child
+  relationship for sitelinks and knowledge-panel purposes. Omit to
+  hide both the footer attribution and the structured data.
 - `HUGO_PARAMS_BUILTBYURL` — if set alongside `HUGO_PARAMS_BUILTBY`,
-  wraps the name in a link pointing at this URL. Ignored when
-  `HUGO_PARAMS_BUILTBY` is unset.
+  wraps the footer name in a link and adds the `url` field to the
+  JSON-LD `Organization` object. Ignored when `HUGO_PARAMS_BUILTBY` is
+  unset.
 
 ## License
 

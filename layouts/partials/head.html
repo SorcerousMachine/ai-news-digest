@@ -19,6 +19,23 @@
 <link rel="alternate" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
 {{ end }}
 
+<!-- Structured data: publisher attribution (only when builtBy param is set) -->
+{{ with .Site.Params.builtBy }}
+{{ $publisher := dict "@type" "Organization" "name" (strings.TrimSuffix "." .) }}
+{{ with $.Site.Params.builtByURL }}
+{{ $publisher = merge $publisher (dict "url" .) }}
+{{ end }}
+{{ $blog := dict
+  "@context" "https://schema.org"
+  "@type" "Blog"
+  "name" $.Site.Title
+  "description" $.Site.Params.description
+  "url" $.Site.Home.Permalink
+  "publisher" $publisher
+}}
+<script type="application/ld+json">{{ $blog | jsonify }}</script>
+{{ end }}
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
