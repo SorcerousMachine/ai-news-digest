@@ -578,7 +578,12 @@ html {
 .back-to-top {
   position: fixed;
   bottom: 1.5rem;
-  right: 1.5rem;
+  /* Hug the right edge of the content column on wide viewports;
+     fall back to 1.5rem from viewport right once they collide. */
+  right: max(
+    1.5rem,
+    calc((100vw - var(--content-width)) / 2 - 2.5rem - 0.75rem)
+  );
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
