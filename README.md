@@ -30,10 +30,13 @@ Daily cron invocation (11:00 UTC)
      -> Step 5: Triages ArXiv papers by significance
      -> Step 6-7: Synthesizes digest, writes content/posts/{YYYY-MM-DD}.md
      -> Step 8: Post-write semantic dedup against last 2 digests
-     -> Step 9: Retires feeds past the hard-failure threshold into a
-                disabled: section of config/feeds.yaml
+     -> Step 9: Retires feeds past the hard-failure threshold into
+                scrape: (if homepage reachable) or disabled:
      -> Step 10: Updates state/seen.json (seen hashes + feed_health)
+                 and state/citation_tracking.json (non-feed source
+                 citations for passive feed discovery)
      -> Step 11: Commits + pushes to main, recovery-branch fallback
+                 (code changes and digest content go as separate commits)
      -> Step 12: Sends summary to ntfy.sh
   -> Cloudflare Pages builds Hugo and deploys
 ```
@@ -48,8 +51,9 @@ Daily cron invocation (11:00 UTC)
 
 ```
 scripts/fetch_feeds.py     # Feed fetcher: RSS parsing, dedup, filtering, health tracking
-config/feeds.yaml          # Active feeds + disabled: section for retired entries
-state/seen.json            # Dedup state (URL hashes) + per-feed health
+config/feeds.yaml          # Active feeds + scrape: and disabled: sections for retired entries
+state/seen.json            # Dedup state (URL hashes) + per-feed/scrape health
+state/citation_tracking.json  # Rolling 30-day counts of non-feed source citations
 content/posts/             # Generated digest posts (Hugo markdown)
 layouts/                   # Hugo templates
 static/css/style.css       # Site styles
@@ -110,10 +114,17 @@ the entry back into the active `feeds:` list.
   48-hour recency window upstream — and removes items that cover
   stories already reported, keeping the synthesis context clean of
   prior-post bias.
-- **Passive feed discovery.** During web search, recurring authors
-  and publishers not already in feeds.yaml are surfaced as candidates
-  in the commit message for manual review. No auto-addition — web
-  search ranks for traffic, not insight, so the curation stays human.
+- **Passive feed discovery via persistent state.** Each pipeline run
+  records the source attributions it emitted that day to
+  `state/citation_tracking.json`, keyed by source name with a list of
+  citation dates. Dates older than 30 days are pruned. Any source name
+  that accumulates 3+ citations in the rolling window AND isn't already
+  in `feeds.yaml` surfaces as a candidate feed in the commit message
+  for manual review. No auto-addition — web search ranks for traffic,
+  not insight, so the curation stays human. The state file is what
+  makes cross-day signal possible: each cron run is a fresh Claude
+  session with no memory of prior days, so the tracking has to be
+  written down deterministically.
 - **No theme dependency.** Templates are self-contained in `layouts/`.
 - **No JavaScript.** CSS-only. Progressive enhancement only.
 
