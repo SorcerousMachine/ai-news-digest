@@ -332,6 +332,10 @@ li {
   padding-top: 0;
 }
 
+.digest-entry:last-child {
+  border-bottom: none;
+}
+
 .digest-entry time {
   display: block;
   font-size: 0.8125rem;
