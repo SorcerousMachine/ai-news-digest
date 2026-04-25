@@ -6,11 +6,6 @@
       <span class="digest-readtime">{{ .ReadingTime }} min read</span>
     </div>
     <h1>{{ .Title }}</h1>
-    {{ with .Params.tags }}
-    <div class="tags">
-      {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
-    </div>
-    {{ end }}
   </header>
   <div class="digest-content">
     {{/* Inject the TOC between the executive summary and the first ## heading
