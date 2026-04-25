@@ -586,7 +586,9 @@ li {
   color: var(--text-faint);
 }
 
-.digest-readtime::before {
+/* Separator only appears when read time follows a date — single-page
+   header has the read time alone, so it should not lead with a dot. */
+time + .digest-readtime::before {
   content: " · ";
 }
 

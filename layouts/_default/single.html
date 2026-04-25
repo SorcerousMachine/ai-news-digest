@@ -2,10 +2,9 @@
 <article class="digest">
   <header class="digest-header">
     <div class="digest-header-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
       <span class="digest-readtime">{{ .ReadingTime }} min read</span>
     </div>
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Date.Format "January 2, 2006" }}</h1>
   </header>
   <div class="digest-content">
     {{/* Inject the TOC between the executive summary and the first ## heading
