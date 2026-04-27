@@ -85,6 +85,12 @@
       ],
       "origin": "https://www.brex.com"
     },
+    "BusinessToday": {
+      "dates": [
+        "2026-04-27"
+      ],
+      "origin": "https://twitter.com"
+    },
     "CNBC": {
       "dates": [
         "2026-04-26"
@@ -136,9 +142,16 @@
       ],
       "origin": "https://developers.googleblog.com"
     },
+    "Google Chrome": {
+      "dates": [
+        "2026-04-27"
+      ],
+      "origin": "https://developer.chrome.com"
+    },
     "Google DeepMind": {
       "dates": [
-        "2026-04-16"
+        "2026-04-16",
+        "2026-04-27"
       ],
       "origin": "https://deepmind.google"
     },
@@ -161,9 +174,10 @@
         "2026-04-23",
         "2026-04-24",
         "2026-04-25",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-04-27"
       ],
-      "origin": "https://www.scientificamerican.com"
+      "origin": "https://arkaung.github.io"
     },
     "Hugging Face": {
       "dates": [
@@ -213,9 +227,10 @@
         "2026-04-16",
         "2026-04-19",
         "2026-04-23",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-04-27"
       ],
-      "origin": "https://arxiv.org"
+      "origin": "https://arkaung.github.io"
     },
     "MIT Technology Review": {
       "dates": [
@@ -272,9 +287,10 @@
         "2026-04-22",
         "2026-04-23",
         "2026-04-24",
-        "2026-04-25"
+        "2026-04-25",
+        "2026-04-27"
       ],
-      "origin": "https://developers.openai.com"
+      "origin": "https://openai.com"
     },
     "OpenClaw": {
       "dates": [
@@ -287,6 +303,12 @@
         "2026-04-18"
       ],
       "origin": "https://www.pi.website"
+    },
+    "PocketOS": {
+      "dates": [
+        "2026-04-27"
+      ],
+      "origin": "https://twitter.com"
     },
     "PwC": {
       "dates": [
@@ -316,7 +338,8 @@
     "Semiconductor Engineering": {
       "dates": [
         "2026-04-16",
-        "2026-04-21"
+        "2026-04-21",
+        "2026-04-27"
       ],
       "origin": "https://semiengineering.com"
     },
@@ -373,7 +396,8 @@
         "2026-04-22",
         "2026-04-23",
         "2026-04-24",
-        "2026-04-25"
+        "2026-04-25",
+        "2026-04-27"
       ],
       "origin": "https://www.theregister.com"
     },
@@ -395,7 +419,8 @@
         "2026-04-20",
         "2026-04-22",
         "2026-04-24",
-        "2026-04-25"
+        "2026-04-25",
+        "2026-04-27"
       ],
       "origin": "https://arxiv.org"
     },
@@ -403,15 +428,23 @@
       "dates": [
         "2026-04-21",
         "2026-04-23",
-        "2026-04-24"
+        "2026-04-24",
+        "2026-04-27"
       ],
       "origin": "https://arxiv.org"
     },
     "arXiv:cs.LG": {
       "dates": [
-        "2026-04-23"
+        "2026-04-23",
+        "2026-04-27"
       ],
       "origin": "https://arxiv.org"
+    },
+    "eWeek": {
+      "dates": [
+        "2026-04-27"
+      ],
+      "origin": "https://twitter.com"
     }
   }
 }
