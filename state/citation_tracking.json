@@ -11,7 +11,8 @@
         "2026-04-16",
         "2026-04-18",
         "2026-04-29",
-        "2026-04-30"
+        "2026-04-30",
+        "2026-05-02"
       ],
       "origin": "https://www.alignmentforum.org"
     },
@@ -93,9 +94,10 @@
         "2026-04-28",
         "2026-04-29",
         "2026-04-30",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-02"
       ],
-      "origin": "https://techcrunch.com"
+      "origin": "https://arstechnica.com"
     },
     "Axios": {
       "dates": [
@@ -198,6 +200,12 @@
       ],
       "origin": "https://techcrunch.com"
     },
+    "Forrester": {
+      "dates": [
+        "2026-05-02"
+      ],
+      "origin": "https://www.theregister.com"
+    },
     "GitHub": {
       "dates": [
         "2026-04-28",
@@ -290,9 +298,16 @@
         "2026-04-23",
         "2026-04-24",
         "2026-04-29",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-02"
       ],
       "origin": "https://arxiv.org"
+    },
+    "IAPP": {
+      "dates": [
+        "2026-05-02"
+      ],
+      "origin": "https://iapp.org"
     },
     "IBM": {
       "dates": [
@@ -369,6 +384,12 @@
     "Mozilla": {
       "dates": [
         "2026-05-01"
+      ],
+      "origin": "https://www.theregister.com"
+    },
+    "NCSC": {
+      "dates": [
+        "2026-05-02"
       ],
       "origin": "https://www.theregister.com"
     },
@@ -573,7 +594,8 @@
         "2026-04-28",
         "2026-04-29",
         "2026-04-30",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-02"
       ],
       "origin": "https://techcrunch.com"
     },
@@ -596,7 +618,8 @@
         "2026-04-28",
         "2026-04-29",
         "2026-04-30",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-02"
       ],
       "origin": "https://www.theregister.com"
     },
@@ -633,7 +656,8 @@
     "arXiv": {
       "dates": [
         "2026-04-17",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-05-02"
       ],
       "origin": "https://arxiv.org"
     },

@@ -1,246 +1,4 @@
 {
-  "feed_health": {
-    "https://aisnakeoil.substack.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://arstechnica.com/ai/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://aws.amazon.com/blogs/machine-learning/feed/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://blog.langchain.dev/": {
-      "consecutive_hard_failures": 0,
-      "last_success": "2026-05-01",
-      "last_error_type": null,
-      "last_error_date": null
-    },
-    "https://blog.langchain.dev/rss/": {
-      "consecutive_hard_failures": 3,
-      "last_error_date": "2026-04-21",
-      "last_error_type": "content_mismatch",
-      "last_success": null
-    },
-    "https://blogs.nvidia.com/feed/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://deepmind.google/blog/rss.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://hai.stanford.edu/news": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-04-24"
-    },
-    "https://hai.stanford.edu/rss.xml": {
-      "consecutive_hard_failures": 3,
-      "last_error_date": "2026-04-21",
-      "last_error_type": "content_mismatch",
-      "last_success": null
-    },
-    "https://hnrss.org/frontpage?points=100": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://huggingface.co/blog/feed.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://jack-clark.net/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://karpathy.bearblog.dev/feed/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://lastweekin.ai/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://lilianweng.github.io/index.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://lobste.rs/t/ai.rss": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://magazine.sebastianraschka.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://openai.com/news/rss.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://papers.takara.ai/api/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://pytorch.org/blog/": {
-      "consecutive_hard_failures": 0,
-      "last_success": "2026-05-01",
-      "last_error_type": null,
-      "last_error_date": null
-    },
-    "https://pytorch.org/feed.xml": {
-      "consecutive_hard_failures": 3,
-      "last_error_date": "2026-04-21",
-      "last_error_type": "status:404",
-      "last_success": null
-    },
-    "https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://research.google/blog/rss": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://rss.arxiv.org/rss/cs.AI": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://rss.arxiv.org/rss/cs.CL": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://rss.arxiv.org/rss/cs.LG": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://semiengineering.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://simonwillison.net/atom/everything/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://techcrunch.com/category/artificial-intelligence/feed/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://thegradient.pub/rss/": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://thezvi.substack.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://wandb.ai/fully-connected": {
-      "consecutive_hard_failures": 0,
-      "last_success": "2026-05-01",
-      "last_error_type": null,
-      "last_error_date": null
-    },
-    "https://wandb.ai/fully-connected/rss.xml": {
-      "consecutive_hard_failures": 3,
-      "last_error_date": "2026-04-21",
-      "last_error_type": "content_mismatch",
-      "last_success": null
-    },
-    "https://www.alignmentforum.org/feed.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.interconnects.ai/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.nist.gov/news-events/information%20technology/rss.xml": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.oneusefulthing.org/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.semianalysis.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.technologyreview.com/feed": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    },
-    "https://www.theregister.com/software/ai_ml/headlines.atom": {
-      "consecutive_hard_failures": 0,
-      "last_error_date": null,
-      "last_error_type": null,
-      "last_success": "2026-05-01"
-    }
-  },
   "seen": {
     "0004cb762483f1aaf805f2669a58feb03afb45d25946efde4accd6ae3617212a": "2026-04-20",
     "00058282b31141fa86e0c0acb580aa7954a64ac884cf7c96fb1228d9a036e70e": "2026-04-24",
@@ -303,6 +61,7 @@
     "0516023dcc75f9102602b7ec4afff109b4754ed80ac31f972d796a5d98ca4794": "2026-05-01",
     "0525faa4444a87e74950debaafebf3af76ec448f76d189100d0e68ba12423136": "2026-04-28",
     "052cdb97a126fc3427e58f1f80a68ae729e1f844672999da4cf770f2bc7519ef": "2026-04-20",
+    "05559d1b436bc5a66e90ce2701375c511a0db5a1c9e52369822af875698b705f": "2026-05-02",
     "055678f8f18e0c6c61c9e843dacfe6daf44f417f19830652b48a72ff52f35307": "2026-04-23",
     "056a069ab75e86fc5d1692eb4a114a3b54dd68e2395e0eab37a101d7bf0371f7": "2026-04-30",
     "05963fc708fdb0f332c1ba268025cd3febdd4de1b70e073b8ad68a523b5749fa": "2026-04-30",
@@ -313,6 +72,7 @@
     "061f50bd46c974ab04dbd13466ed1dbee9b525028f96d09f335b6a3a82139f12": "2026-04-21",
     "0626efea10035eac0214ed865471b7363f921ab1af54dc71481d9a9ebcd411d1": "2026-04-29",
     "06275fdc0864f7c9c3f7b7a7977be1cbbbe0712e4b827692b5863a76c901f171": "2026-05-01",
+    "06437414309dcca2fcdfad36e3443cbbaeabf36504ed229ddc48053aeb0ac4dc": "2026-05-02",
     "0652e0d51483e0cff10d81f5b75008f3dad185ec4af25cd37b677e774c96e07c": "2026-04-20",
     "068eb427302c0a7c73a92e4adb2b67c203cc5e6082480da12e3b67d4f222b742": "2026-04-21",
     "06c64aba8ce177aca91f5f4f806e7725abf47fbc87c865d2228b688839954d7e": "2026-04-24",
@@ -353,6 +113,7 @@
     "0ab32e08f01a3e071f2b7e2ac5f25faafe3ad0018bf8728ac7e922bb1810fe03": "2026-04-30",
     "0ac6053509f170013a6665f575bdf7bf9273732a6f9196c54c349fee931bbf2b": "2026-04-23",
     "0acdf9f2b5eb9d861ed65c7c2a19886be6166d568f3f08e2e070e6f97f0b1261": "2026-04-28",
+    "0ad4b58ade82a4b40d1dee705338968e40da194f36860fc9f3223a12f466f139": "2026-05-02",
     "0adcf4aa9781db3b470aa8b8461f4bd764ede8c8bccd172280affa310f15bf8a": "2026-04-17",
     "0b22670ebdc1d6dc21b45b2a4b6f5e97d0a9c49c1b223e8ce012366583feb98d": "2026-04-21",
     "0b235a527ebb71756ed83969a45ceb1c11e63c2dc1643f3964cf38dec33b4882": "2026-04-21",
@@ -418,6 +179,7 @@
     "114748555231cf7c957f21de42d2a19b1f056689153d909fcc373d419f165cc4": "2026-04-21",
     "114a6b5de185a3daff95f6d5d0fb78407e47a0893f0f7edd45a1729bc2827d78": "2026-04-21",
     "1186b1ef8f7552f838e62a55ecbbf7d17560ec16450b6e43d8080fe5d2d58c20": "2026-04-28",
+    "1190abc7d6dfd6fb3f78a7f3ab7495d74ecf405b3647cff12ddd312322ed4875": "2026-05-02",
     "1197743f401b63ad69259606e9ec2a53ef7894539e37ba363cc49a79bc136203": "2026-04-29",
     "11a1c41add92e9a3129f4db1c4cec9ebbd569a6f0c475acbb218846acf28df6e": "2026-04-27",
     "11bf59b13a6ecfa8b095d7456b5fb0d6e3e70de9f9f55374bb81d69d9ea0103d": "2026-04-23",
@@ -702,12 +464,14 @@
     "2c71f58d15d297490dbef8b9232b36fbaee1e5ed6c2dca0ab25bb07a250b19bd": "2026-04-22",
     "2c7725a7ab524d2139a2ba8403702e42a53b0adeb194a4df584ad87f100c572e": "2026-04-18",
     "2c94a723bfeecaa980d7e8bc770516fe625128efeac870486502b5630b52be42": "2026-04-16",
+    "2cb0912b2aa5562e5504ea0f9a49c5e61b313494e4534e8c8d0af644677768b6": "2026-05-02",
     "2cd8ff3adeeb79aa1e80bb64d04bdfffd2545e19248d86c3247c35a3fd1b1b78": "2026-04-21",
     "2ce406dd53011ea0d363af37ef8433c32389544580e85da27ca6373415356388": "2026-04-22",
     "2d15d553b53c37dacc429fc3063f22cbd5f3e7fba3362e2873bc8d7b72181996": "2026-04-25",
     "2d32d57165eb0aa81094e3b20a4b5ee2d462094c53c98f6237b344c12d6fa0f6": "2026-04-24",
     "2d3751c5d53f8b1a022a1f2d500cc006d5b8d9b07c637df5cc7aca4f53e51c4f": "2026-04-27",
     "2d4ee0e7554bee2e4e4548cbba6f6358b307e4d9df7bbc3809457ee89c3dfcab": "2026-05-01",
+    "2d6eedf71207d009d1697180e90d957ef9a3968d494de7051dcb57142371aaf7": "2026-05-02",
     "2d7fcd07c37e9c011c1aa06db4533f295ca8ebfc902d0ac1f88a8b4bb2bc971c": "2026-04-21",
     "2dad89431a5aa870d81b26a7608529c2d8a8e94417f4e08ec8d38befcf006c8a": "2026-05-01",
     "2db5d0588143cb40e3022fe61c7ac8c309dff582bc20a52a87de20ece609c4fd": "2026-04-27",
@@ -778,6 +542,7 @@
     "347c47b4a0c08e45c6944028501cd4ddbcdb6d799c35786325e2a7e6a30c236d": "2026-04-20",
     "347f0878c849310299da5978d75dde71495a4dccfc73a58a2a8bddddd965d7ef": "2026-04-29",
     "34825e464ecbfa78b14e327bf9af1071b3eb922c4209a3793ee311e5d0743380": "2026-04-24",
+    "3486700be1af1c7479acb752002156b3e1e0efcd07addeda055f41494100b8bc": "2026-05-02",
     "3490e2f9f4c4287d5d42ba38d41f0bfe19cd2aadd9ae834c554cc09e9fd314e1": "2026-04-23",
     "349327d22db7436daebcb0567e37fec9ef58884be5c6adf0bf5d966629f8b676": "2026-04-30",
     "34a20e805ee7062d8fb228b4d267aaff27918271a955c472e7ae619f8ea94ea9": "2026-04-28",
@@ -792,6 +557,7 @@
     "352ad05f0ae8ff9a957e33ff24af9259e774cfecc9de4436d8502e8976e67579": "2026-04-21",
     "352b42ae9e20f88a44d6fee2b0d9af95956c202f0938b3250712d5cb82a33075": "2026-04-24",
     "3544b56b1a5e3974f9781c6c79523e77dc3db64723f59e636168c3f20946a9a8": "2026-04-22",
+    "35474a297c3f4c93748683d0b1b5ba8d5aaac9eec52c7a495700af34c0dcc341": "2026-05-02",
     "354dfb121a53fed24ddaf755f34f6cee5cc0c1b61971a4b7d6834d716dcf1a61": "2026-04-22",
     "355001a0f05f19d9995f42300ba3efb4cdc4077ccd8afa66f3d5ac239485ecb1": "2026-04-22",
     "3577ca564043d10a6ff9c1bed95c539ee38c4ddd5b17a92b4140ba8e09f5cdad": "2026-04-22",
@@ -935,6 +701,7 @@
     "42dfe0d35ab5c6b0abd1deb3a7d7f6f154bebd91cf909c05be8cb41198fb54a3": "2026-04-21",
     "430445e5ff9033e98728c84561f9855239583c91424d4662d155b5990b62a2f7": "2026-04-24",
     "4307660daaef8b6df7013f9f529bea3a0b1c2c89e4c207edf0d8a7ef43e8fad0": "2026-04-20",
+    "430e21f29adf7c747459f22a198699d783c52181178244827eee7459c527224d": "2026-05-02",
     "431973b93d2109b89462a535c22abceedb10e6a8d9c0c5de976c6438ae160bd6": "2026-04-21",
     "4335e3c32c7de8130e1001f18afc991654638c95f3215865266075a3a1593f1e": "2026-04-28",
     "434fe9b6f185108ad5b8e1344a6e65116a1e7a8ca991eb21b5fbffd741a6ddf4": "2026-04-23",
@@ -997,6 +764,7 @@
     "493bcad8a8119ce0d31c24120400d682040c3d449a305f31af07a50950ffeda9": "2026-04-24",
     "494a2b012ce701020af3f94d6029b1b8abacc1531963114712cd13d4949fcf7d": "2026-04-18",
     "4968b45616c02d7d1fcf0fde403b885ee575a5b5ce9b3e54d63a5d72c800ca93": "2026-04-23",
+    "4992acc78298eb324ad8d2880d0b901eb2e8e70b375a0d516ec0d62b7bdaaead": "2026-05-02",
     "499bb728e67c4aae2dfd079cf6d74827146a93f05f86ee8c5504141e94dbad84": "2026-04-18",
     "49cedf1472afce04721595c99013989b66a9360b336cad46caf457eb18f84fc9": "2026-04-27",
     "49d1606d1b3f5e43dfa6dc7b21e0848d9f4e163085fd82e0f1b388bc5dce5c6a": "2026-04-30",
@@ -1020,6 +788,7 @@
     "4c5ee9f42c372d8be0d0a8fdc49ccfbbb7817a08a4f45e64434abc57914b4af4": "2026-04-22",
     "4c919e1f8614b610d42672dbf107d9ebe15fcab3dbede5797986ff4b1845a525": "2026-04-17",
     "4cbed210a6be8244dc363e4056f2ef59619ef7c9b5b4c0aa09f583c37644803c": "2026-04-30",
+    "4cc78dc7b4f5d240da6d3b1ad817c7bfa546e64489a3212ec3c23cc11d7676bf": "2026-05-02",
     "4cd482c6e0e92c3e7ef8833a309cbfea7d7b00beb67a45512a00037d241fbb30": "2026-04-23",
     "4cd8a4d7985acc77d43bca4ad0144dcd0d1a3384849abcd73e3bf4f018f2ccaf": "2026-04-29",
     "4cfd2e772e22e4e49f58fb861b05293bf0000be293668f97226bc5afef383813": "2026-04-27",
@@ -1107,6 +876,7 @@
     "53c247bed534d20646cdd393d25dd9917bbb9b58d2ad833b5dd876c09f28e99c": "2026-04-21",
     "53d611df1547088eff3f3fab3321caae916c44fd98d509769bfea31763537a84": "2026-04-17",
     "53dec065a0be97333c411036a2938c540bd1a19649cb12376e3c2892d48f8178": "2026-04-22",
+    "541a01231a2962c4f7e88cd5ebace036cfdb04ad03f75ee7e75453a08fca6716": "2026-05-02",
     "541e4ab90889211c0e225a0d23dd0d3e22588fddb22e98cf609a37d11023117f": "2026-04-28",
     "543a3f4ef335eca053f2227f85fe5e5d5f7e60e96758a101a650df9f464f3575": "2026-04-24",
     "545f0db9d7ae2ce50c9cba610e6ecf7b9dad4bd1456b5c4b62337554850b1046": "2026-04-29",
@@ -1133,6 +903,7 @@
     "568d417d97b7eba26937f81836402d685207c3487a5b06b1ff3386f058f361ce": "2026-04-29",
     "56b05a5b77932a17e907bb23a92d4803807c7cfcdf4080318f1f58e9f88c332a": "2026-04-22",
     "56d6e4c61e9846b3e1ca2394f72028b0c64a12332611a1f041c0514dd7796336": "2026-04-29",
+    "56df1ba30c32b882e2d56eb2983aaba0bedb2880c685849838ea29f7245b65f6": "2026-05-02",
     "572893dfa9634ed3d0885e318ba7e8a646bd471bef333d1c1f5fc4aa4e45f0ff": "2026-04-22",
     "5735e0eaf36b288b53d5b115403cd1177555990cca2c78c109fde2a47d6bce02": "2026-04-21",
     "575f4ea8cee99c1c5815925cac950aae0ab172f3ef3cdfeb0d05269b3addfdcd": "2026-04-24",
@@ -1270,6 +1041,7 @@
     "6401d4e58653a16612892387a54dc477318e475e12fbecc29d8a9c68d435a3d5": "2026-04-21",
     "6412a5fe12832367c87837d349ee7bd688d3e8f803b20759c6c90d4225919bc3": "2026-05-01",
     "6415d0cf2b7d11b52f0ea420f3565ef806a7cd920036f19027993882c9a99005": "2026-04-17",
+    "643e87f22f61b7ccd48a43efd3db113022d8c52e77b0a41be4232faa28908600": "2026-05-02",
     "645ff40954361f3da23e0670e226d0b4f42e79279b20895b9ebe8cd9ac82c94a": "2026-04-17",
     "646f2aaa62ab68dc8e046bfdd0fe683ed12fb59095c15639e8314543118db2ae": "2026-04-25",
     "646f5477b740694a195de5a731783e2dc308ffefbff86e3f21affb5308eeaa71": "2026-04-22",
@@ -1286,6 +1058,7 @@
     "653e5550a281faaa10ef8230bfc937f2604b5d6047e957b0d81b45166dffe402": "2026-05-01",
     "655d8b8756825fc8ada1c14d06b0d98df811984a46feb9080478056ae2a1030f": "2026-04-23",
     "65667cc63da025263016c892e6b719764673fd4d9c2ae3cb69edb6a55d7f853f": "2026-04-21",
+    "656e19c4737a81e166833f35d88df4c80e413a416b41d28388120cb912b4df56": "2026-05-02",
     "6571ddfa8562b1ef9a819142898bbac2eaa254dde2ac14d151d74dc994a7b8b4": "2026-04-17",
     "658a0953fcaf6b29a4419338b0f1f4491888e121d77a9ba07cd28cf92bab438a": "2026-04-21",
     "6594d737fe35f4d8a977868bbf29adfac0299427fc99aa0b6648e4f2581bd8fb": "2026-04-21",
@@ -1305,6 +1078,7 @@
     "6742214c6c6baa6adf5b09383c7aa44230a1dbc572cc7ea7b457ba8327ec7978": "2026-04-26",
     "675733ec60e43d3e24e79df68ccdf7dec5d823f818a825af105caac0c6c17a58": "2026-04-17",
     "67793d901deae8cdbd04158bdf73d7d4596b91f0c1cf79866e66ac3d072b8f13": "2026-04-16",
+    "67796018d2e018a0fa6b809d8a1ce59c8a7478128d1fcd9f931c85d4ebf30729": "2026-05-02",
     "6781e7b42a607062df9af0a19090ca9befc0f7c77b1f11f5e580a822b69df7c4": "2026-04-29",
     "67bcc7f0597adb977a2d19ef0705056088119cc50cee157ac48538a581f76f8b": "2026-04-26",
     "67c81557e07f61f416f7fd4b1ebbd925392ae3134e0c6ba1532e19994fd4796e": "2026-04-28",
@@ -1521,6 +1295,7 @@
     "7da5e45d3236297ec3f63b89f22bfd246fa07b40b99d87720a413517f5a34af7": "2026-04-23",
     "7dafe47d1307480ef8cde4805c0140d1ad17a62c9cbe9283ccc276e59f3cf144": "2026-04-21",
     "7dbd132d6df1037d42ca75d0cbdc0fd881fefd75972b1fe9e1efd96cca7710e9": "2026-04-23",
+    "7de55a92ea9416f7c11af4a5cbb68d3127ee5ab91a7746df442cfd6e0edb9ecc": "2026-05-02",
     "7e4ccde233be47d6b0837e3fd1358ac9490dfb5d955568b92a662a3470dfc58f": "2026-04-20",
     "7e733a31d683d7323b85c2ff1c29a4e710cfcf8a3191a80d724de68200cf4506": "2026-04-24",
     "7eb2e8053f3168535e2d87bffb5b09add51f31fd5bf883d2cf9534531f035822": "2026-04-21",
@@ -1579,6 +1354,7 @@
     "84748fd8994c0266c260be37b2b352efbe7d996e7bf736de62059d34bf93e877": "2026-04-29",
     "848ee67e1122600d69830050e2b7ca3649c501ef70f2e31774513b04249810e2": "2026-04-24",
     "84991064d08710244d012894a68681738bd47f4e7c99730c2c2fd9995a57a5a4": "2026-04-21",
+    "849ba5e87924bd1c64e4c609f86c1859c5ce8878f9982c946563bc976698f33d": "2026-05-02",
     "849fcdafc17e4903bcc798d25996b17cff49ec47635ab93c0c306ffbbffe9a18": "2026-05-01",
     "84d34f720109caeb568376bcc881b1393d3aa28388bb2ade4433a6c86706babf": "2026-04-22",
     "84f582bfad7d23e798aae5ad5fc173debff34d04442a0333ad600a6e273adc29": "2026-04-22",
@@ -1708,6 +1484,7 @@
     "90d9fdf63df21f07424cdf402d74b688d1d4a9b9b911e1d6acd31d40715602a2": "2026-04-30",
     "91232d4d18c530c907eb7df4f3e0bae3ca5a1c8120a429fb5d507a1652fa7cc3": "2026-04-30",
     "91276d66d79b5ec4aa08a98150e8375889ce0f90879efbb3db133eeec38a6d3c": "2026-04-22",
+    "91666b41d49350e08912a385eed2ec579a51d3ebfe2b755aa424ff6d727a7090": "2026-05-02",
     "9176619881da157ed99c54ebd3254e21c1ce7e5082cec7abe7a6a8b135f6fff6": "2026-04-30",
     "91a5c331e6724bf8a4397b2c349332fc6313f79cf0c82809684d67aef599afa6": "2026-04-28",
     "91c01f55e0c6ac5b4ff1e9d746f70af53f198f60b577e2801181e755e2e6b980": "2026-04-24",
@@ -1815,6 +1592,7 @@
     "9d2c431671e735ec221dfbc71cd4e12119ab7666895933791820b974af9d0775": "2026-04-21",
     "9d3e13a95626ba4c37f5ec32a675e3c443342b5327e0f6f98cacd1e12e2f2476": "2026-04-30",
     "9d5d4f787dbdc75aa0a42f303422f43c132f6446816efcbcd56056968709c5af": "2026-04-22",
+    "9d64671fcc163f90e8e1dbfe9a444c1cffdd67d6d1f890b1343ed67b76a70c95": "2026-05-02",
     "9d745fdefed6d1ee7a9766403796e4b49f9ab4fad65d188ede47e07b0654cb00": "2026-04-24",
     "9db5935a5c734c8e41bc7e9a1a5403079ad514507f4e13af06d73a5548b5208e": "2026-04-28",
     "9dda375bcc7dfd6bf08a0d4975ba2099c22fc32fd9b74c2124649ce5e326bfb0": "2026-05-01",
@@ -1841,6 +1619,7 @@
     "9fb3150e0f1b9f0680599499b130c0471f74ecbe0630351d1e15e8b5c75cdfcc": "2026-04-21",
     "9ffcfb3676c290b970d5bed3ef994d6a28a01291997422574f48e5a2b4720aeb": "2026-04-25",
     "a0030d195d83a8a0a9b2e07b7d25017bb0717c62320d8556a00d7432717f3814": "2026-04-29",
+    "a0144338467cfc6f6426fd837727601f5008ddeaa6c003ae12bab0c52b965685": "2026-05-02",
     "a02566da41ad9eb5362771effbad0cb306195efce13b0c1c9f0ee24c7d496c77": "2026-04-20",
     "a026052a459c265b93e2f7ba0f28a55f5b6b606088adf034a50fea0dc47f828b": "2026-04-22",
     "a02f7e2460c6c024f86c95272aa404842b70e0dd779a3fb7c35e6a75d61990b5": "2026-04-22",
@@ -1888,6 +1667,7 @@
     "a40b753a2d3f9057ee9739162f9981404e23a4a63b78cfe831803f1af43c344e": "2026-04-16",
     "a43a6113af5060de5f7cfc4f886e729bf9d6e00052948f757410f3ca36082ec6": "2026-04-24",
     "a448d07810e291eeefbbd4784e162fa998f40b40d194c40f5ad45b28d64fa98b": "2026-04-22",
+    "a4596eec75e20c97524ea5da5e53bc57ab11f196fed4cec1cde05584701e4438": "2026-05-02",
     "a46611e5dae475b7167f39e7745585f32e22bcaee7a546d9d8d0c37dceb19111": "2026-04-23",
     "a46db5ae387408ccebcb5dc17dd42ffd06231bb00e05b4513fbdbbec4a7b0a69": "2026-04-17",
     "a495f6f74030fbdf2d9e51042d07ca511cfb540fb1544d84200cd42e53bd21f8": "2026-04-21",
@@ -1985,6 +1765,7 @@
     "ada5b40cd3ffc1f4570a2a0b61eed2a8648837ed5aac70777255d38a8ec8808d": "2026-04-21",
     "ada8685a4da1d28f99ac6d2a3dd05f108a1f3a1ff3a1c338e31d2e975e6140ba": "2026-04-23",
     "add21bba521fd987620f4d1ce4b98662244322a63818658b8d4a653ba571ed88": "2026-04-24",
+    "aded90e8a0705584ed6dc96010623e72a0360239704a54a05ba423c9a03c1407": "2026-05-02",
     "ae1566350437291dc06b5dbc13b8f51fc62d75f38b60f28426ba391be5db0783": "2026-04-28",
     "ae35c430513423791de83b19c66d7478d9853591c5441fca28104114635cba2b": "2026-04-27",
     "ae924a90c5f899171b9979e47162e3019ef361db47f86c71a6470c6b487c8b3b": "2026-04-22",
@@ -1994,6 +1775,7 @@
     "aefb248296d28ef8f94752cd3626e3d24335ec29dd877a09c9465c7528f3598a": "2026-05-01",
     "aefeb39232e7ac71b97f2aa72b4447213f2c73d392422138d71f54d65cda32a8": "2026-04-29",
     "af346db78df223dd6af0fc25b133a37fce69afaade17b0ce2488da4a3d7bd8c0": "2026-04-24",
+    "af64699bc0833fcd69e47a4b31563dd3fabf7606fb2d62e7acf64f494031dc7f": "2026-05-02",
     "af6888b6efcf21a80e0b22a3295d97319152213278e1ce72ad9336947da6e933": "2026-05-01",
     "af718c23d9d73de6e8bfdbf2efca6bd8db8f148287678da7fc506da8adb4d0e6": "2026-04-30",
     "af8d63b691977b657c5a25c628d69c81de25d777fa23df28564d215249678033": "2026-04-22",
@@ -2047,6 +1829,7 @@
     "b3c35dae0e404f731bd5daa81b6e8dd19894242ebca049fad46057375662a245": "2026-04-26",
     "b3d0897aba68e123e348c8553690c17e6ea07c684675703898a48fb784b89c16": "2026-04-21",
     "b3e0bfbe3f5203031b84691e780b424d87e6d7a6817590d65c58b3cd314bce6c": "2026-04-29",
+    "b3e45553616d0c48e4f78cb6911914213bcf8b214557c7040f40a6f801057308": "2026-05-02",
     "b3f1a86f806de0daa44a088b9dca83771386bd080d5c6f3560647691079030ff": "2026-04-30",
     "b40327821fb061eb28aca4ed31482ba423dc48bbab352125437450747539b1f0": "2026-04-17",
     "b428bc85015435c9a064557060cd4d317128043925e45b5c5a87cc44c3b8aa99": "2026-04-30",
@@ -2072,6 +1855,7 @@
     "b5822fb77e5daf69d0a8ed20efbf8b861c4506e2bd1b39e896262ef67fc18d65": "2026-04-17",
     "b5b24cdb5b686d864c58746572f113897abf55b6790ce7aee5a145f5caaa2f77": "2026-05-01",
     "b5d18c04f7f67bab650de071ee075bf027eddddbdd6c84d84abc41f33a9171b7": "2026-04-28",
+    "b5d282c37b803deeed0d61e2fdf0a472cc2e528a9e12289bf6009d6cb760d6f3": "2026-05-02",
     "b5dde55c0a7a340c7ddf8e0c66a2939b7c56d30a4fbfb62834ebaac0c46e2187": "2026-04-28",
     "b5de55c615419f986eea0a6e3c340466744706aa995618e423be3e116d31140b": "2026-04-28",
     "b5df7c3815b4d2f8788e8f56316c4a3286b09ce6e0e81900e5cdd19f0542252d": "2026-04-23",
@@ -2113,6 +1897,7 @@
     "ba9063007828ba21a649185f818ab314f2bec938d87b5a3adb7bb1f705727315": "2026-04-29",
     "ba99aba2739c4dc6ae1dd5b1df6793552f7bf4e9a437f096c8fa3ea9dd498897": "2026-04-22",
     "bac606f4ff08fdda0ec167f913b9c0fb5db3f3948680f9745f6766655dea3b14": "2026-04-23",
+    "bb145e710acc30f298efe1b81453baee931d0cd96bbd19ff2053403aa6523d6f": "2026-05-02",
     "bb1678001ef3cc4c9a4e42dd57e1a666ef5f9f07b0574e1cefd66a96583338ef": "2026-04-29",
     "bb3ffe26a7e6890d6ae6d2082820d60eec39c2207e22a3d74a01d5b6389cd2d3": "2026-05-01",
     "bb442e7bd5a67ff4133ac2ae5b3d06dfb3364c4972412815ffb0ead364f81fd2": "2026-04-21",
@@ -2150,6 +1935,7 @@
     "be9ae8ed0f1b44dfb789f78bf449bc447fcce9f9dbb5b1f3de8936b7c7403656": "2026-04-27",
     "be9b89e7adf1b16912d0affbc91f87a3ee53c9384d9d06480399c64aad0d98d2": "2026-04-21",
     "bebe8ae89a9a0ba3c11e6cf39e0440557a33994579d92f50eea31b17382c40f9": "2026-04-23",
+    "bebf1b9bf84c2ad3281c73b2a5dead72d9e96c063e896ff6190905cacf9bcd3b": "2026-05-02",
     "bec90cead7a0258b6aec7c87b1a2a7917722cf9b50a7cef5bdb4e085e6b30c5b": "2026-04-24",
     "bed78f241653be61db91bc5e16fabd6ddead44137c53c2f5418111a448e4d28b": "2026-04-20",
     "bf07355de0ee247bf622131c5365e9338e77d11c8056c264a205eacb466de4a4": "2026-04-30",
@@ -2176,6 +1962,7 @@
     "c0b117fa031578635533adc5acc0aa7d211b712b621c20dbe66a6366f7079815": "2026-04-29",
     "c0c14e8974bdc10ec52440e6bf6e1130b8d59e49e81aaeb0d92964a6c927b2c7": "2026-04-29",
     "c0c5034b97adb58c8262a4159e77ee1eecde3e7c2719b70ddd94ce8619b62b0a": "2026-04-16",
+    "c0d96131b29f32a9125099fcf3d815ea2b2a1e6be985debcfdd87e395e9ad586": "2026-05-02",
     "c0edd18ff8d4f04374941db4c643b8e887331cd7015122d50787bfa9fe3a12fb": "2026-04-29",
     "c103674eaad99934d591a9cab168a92db02ffe3ba2365035388c436ecf33ade1": "2026-04-18",
     "c109acff33d47cfde468179c025dd5113ee1a7a675f3f5565c0e19670dc9dc32": "2026-05-01",
@@ -2288,6 +2075,7 @@
     "cc8256ff8209af035ba379a7ae8f3543571959e6d67a3e060f1ac2ffcc2736bd": "2026-04-17",
     "cccc5f07c2c667d1893ab19ee3415fa97a7ac395730d16d75db2d735c3d54f23": "2026-04-21",
     "ccfa137b743937822fd83d8b76093b9c9611654cbd567b87d57f49d026e09fde": "2026-04-23",
+    "ccfaf3dce688b8bc17dbcf582c8ec68f7c974ce34795a73fee11040aba8bacf7": "2026-05-02",
     "cd1a3283062d02687cac84a22b7d6abd576618b2160f132b99da8e4f9c132bba": "2026-05-01",
     "cd2e65f6b81b5175c2cd8b22c820eea71f9ecb01ac95f0d1718e96db401f994d": "2026-04-20",
     "cd43a44b5a878840a6dd12ab3bbf2eb05a3498baebabdde592472afe37663d45": "2026-04-25",
@@ -2405,6 +2193,7 @@
     "d91abfabd8a52b03fc291702ada4ae3c423e7285a584beb68dd634ed06035972": "2026-04-22",
     "d91ff81fb66fc31dd397f1eafb2d36c04aa33c3912674af708dfa8cd6261fdd8": "2026-04-20",
     "d92bfcc2c0aebfc73c0a95839029cbb11bc194edb95326bef31dcd3ba31918f6": "2026-04-24",
+    "d95a8dae41fd5452c49eaa7312a6b0f520e529311db0f84776ddf01d8ca5cee5": "2026-05-02",
     "d98142a63d6913743cc06e62cb7f2eb206612f6a9f3e220817dd3564efce68d8": "2026-04-25",
     "d9986673622625ffc115bd7a82016d24d0e1ed9d75485664a9bff08131d7d2d2": "2026-04-28",
     "d9a3a5dec2414cb2be20bb050df03ce69e5c4d7194c80ead1cde77b167c2ec81": "2026-04-25",
@@ -2417,6 +2206,7 @@
     "d9ff2ed625c3e30db4c9af93f3aec2446a16f204516df555fe15cba92a14cc98": "2026-05-01",
     "da346c60014dc5c5b420d08bf15e8ac1766f6d124967c64f09002a35668e7776": "2026-04-30",
     "da83f34af93d9d19bce0f05cc60f7d6d95f8235fe94a080da45d73f1aa592a7e": "2026-04-18",
+    "da96809b3e033cdfa1e0d40ffb9ae98702adc9ee3e3267303bb74b584af15418": "2026-05-02",
     "dab4c3d9d7c0479121be2ef1b326bd23fd87f81971cf4b4a641eb3e17006de39": "2026-04-22",
     "dabc0038b8ba13e2b46a66b9a143ede2684bd82ff848be78fe1e84e279e8cb51": "2026-04-29",
     "dad4ebb6a256dba02417c07bb6d81df49805504169e05995f3366ee4c459cc2d": "2026-04-30",
@@ -2508,6 +2298,7 @@
     "e1f014728c9a0ea30b34599f707c5f0c35fdb007aca61901e7aba99bf7654d05": "2026-04-29",
     "e26b9adaf949dd9fcb264e2cecd887bc846f9c7e12a7c2709b11cc8ef6c6d8cf": "2026-04-21",
     "e2964ef89e8df7ebcc6780599d225e30082a40045c5ddb7498d58bf29f7b077e": "2026-04-23",
+    "e2e3745a31d1a9d560137362a477f72e332e63c799d42b226ad28b39fe89d760": "2026-05-02",
     "e2ee54e8997815210e53af2517200783a2986ceffab399d6f17d81da796929c2": "2026-05-01",
     "e31b5eed12f72b184a985d9a2d929a6c5acc1d49b7ab5b1206a28813c744335d": "2026-04-29",
     "e325d5617fc0361b16d6dc96723770297c9b4eb5feff215d38d7a8f8f8157eaa": "2026-04-22",
@@ -2544,6 +2335,7 @@
     "e6c93e8a31e4f38c4eb4a506798b5a3e104f36246b7c0e6ed0f8f11baa16711f": "2026-04-27",
     "e6e4069457874ff76261e2b4015d14893ea185c8b39a4663273d7cc32aca493f": "2026-04-30",
     "e6ffae8622959ebf677a3275f7343fd8ed3aa78a3db900070eda1695171e1d01": "2026-05-01",
+    "e706e7bea9a6d6b53f5a9329bc863a079a6aa3c098c7cd8134e525047ccd1f40": "2026-05-02",
     "e747abbdc0060784cdb16162942128474e8e6af820f57e7fdd9ddf69a3519806": "2026-04-17",
     "e75ebfc1309478bc9770b9a759dd48111cadc3ba553500e48f2f8178e97bc284": "2026-04-29",
     "e770dbf1ce9bcdb95a5d282c8bf1079849b3032c832901fe3a120651b8d23094": "2026-04-28",
@@ -2565,6 +2357,7 @@
     "e8c2246c5ab570eaee83cd83a8dac600ba74d5248040c7fb96e276681b1dac93": "2026-05-01",
     "e8d5ef645048f1451d40bdfd88f8cc9d9d14f8282fd9fa54c92bc5bf101357bc": "2026-04-24",
     "e8e0610cd20f74df8694d67a5ba66c8ebed870dc4fbf95aee6ff20c557d74548": "2026-04-20",
+    "e8f8be00661cf1a4038b68d0c126b1c45decb1494585d49616ea932dd2d2e39d": "2026-05-02",
     "e902dfbd49679bfc26e9f458dbc7827fa2e3c8cde042d8370c604be5fd2a139c": "2026-04-29",
     "e909c74e0f74e20eacb7946bf9f39093937c53b7b137f6e00d8b1d58328bb411": "2026-04-30",
     "e92a0cc7de4d9c78281fd5ccc41ab3eb6039d462ca946a5cc629a4fcdc0134f3": "2026-04-20",
@@ -2608,6 +2401,7 @@
     "ee2df553e80205483d40c25f78ebc77c5f43a92c850c79e93628cb9e7dae187b": "2026-04-21",
     "ee5c6b32925a5a0db7dcba14f36964f443f8c8dd696fa11b760035a9bd8e98c2": "2026-04-22",
     "ee6151f2030bc973b00cb31447e000c04c762c64d86bde970f4453f9e84ed00d": "2026-04-29",
+    "ee836dd8842d9d0d99e1a1541497c07d3fe8c57b186f0de3cd5af4d3fb9ded20": "2026-05-02",
     "ee8986fe4114f2ec35917f8b602c1d0e7efffb76ccfa565d63aa70d20e98894b": "2026-04-27",
     "ee8c110c1b5f398c5ed7fd96bc3e557297618510f1de6c289e78be2198ec014b": "2026-04-20",
     "eee940a56ee40480ff4b02953609a62ff14b0c6ce91090172d5b86dc8b99185c": "2026-04-29",
@@ -2652,6 +2446,7 @@
     "f2a0c1d2006cc4c97a9a87a26e47d771b040c1384b645150d36a4d6338476701": "2026-04-28",
     "f2ba14ba2ac25a8aeddece38e4087fb9f4493e31ebf9b923fabd011a2c40cccf": "2026-05-01",
     "f2cb625e1c53dfc4862d88b2314822927eeccc32120cc983660d64b796126577": "2026-04-29",
+    "f2cfe044addfebbd1ea6c1279cd47c1702bea43669895842006ca9771db5f4c8": "2026-05-02",
     "f2f11a00c767ed2391eca41e37c7089310a8af6b133302d31eb982cf536cf820": "2026-04-25",
     "f2faac3294a689d850d6dc813cfbde3ec9c9dca960ee26388760fc7e359bbc04": "2026-04-30",
     "f3185551eedf8176772163b2bb6c6f15b81a24b759ca6b8492f9e87a407409b0": "2026-04-22",
@@ -2721,6 +2516,7 @@
     "faa3952c3d0fed899108aed62776cc2f55359e2fe4b3db1c488312d6491cf451": "2026-04-24",
     "faa79109fd5ff52c5f185134d7c2602150b82e6492f48f4427d180631ebc40d2": "2026-04-23",
     "fabcb1e23d38c18283b3d2c6701d010db427a8652a7c86bfdf89b96599451941": "2026-04-21",
+    "fb336b611ffe3b1912690d03b7414a8a7d224c4af8584cd1bf43aac515305209": "2026-05-02",
     "fb3d772e088b631cabff16a04cdca7c374b757e0d1ec869c7078062132ff5123": "2026-04-30",
     "fb74c97444be9c4b6f73247ed58081887daba74eecb5007f94717a65a9104c1b": "2026-04-21",
     "fb7a096e179f8517c32ef18e802dc97cbb20b636b8ecc2da861c568db8ed21ee": "2026-04-23",
@@ -2771,5 +2567,247 @@
     "ffc913eaf5df17e33d02286cd0c1c72a1013076c52af9039213ac00f927a3a18": "2026-04-30",
     "ffdbd1ebe59361f852cd1d30b6366c2f03c413b1f923095b63334e017122300d": "2026-04-21",
     "ffddf42f014f39983b03460ee589d34aee07bc649f3f14b1f127b84641c0e329": "2026-04-22"
+  },
+  "feed_health": {
+    "https://aisnakeoil.substack.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://arstechnica.com/ai/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://aws.amazon.com/blogs/machine-learning/feed/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://blog.langchain.dev/": {
+      "consecutive_hard_failures": 0,
+      "last_success": "2026-05-02",
+      "last_error_type": null,
+      "last_error_date": null
+    },
+    "https://blog.langchain.dev/rss/": {
+      "consecutive_hard_failures": 3,
+      "last_error_date": "2026-04-21",
+      "last_error_type": "content_mismatch",
+      "last_success": null
+    },
+    "https://blogs.nvidia.com/feed/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://deepmind.google/blog/rss.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://hai.stanford.edu/news": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-04-24"
+    },
+    "https://hai.stanford.edu/rss.xml": {
+      "consecutive_hard_failures": 3,
+      "last_error_date": "2026-04-21",
+      "last_error_type": "content_mismatch",
+      "last_success": null
+    },
+    "https://hnrss.org/frontpage?points=100": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://huggingface.co/blog/feed.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://jack-clark.net/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://karpathy.bearblog.dev/feed/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://lastweekin.ai/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://lilianweng.github.io/index.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://lobste.rs/t/ai.rss": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://magazine.sebastianraschka.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://openai.com/news/rss.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://papers.takara.ai/api/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://pytorch.org/blog/": {
+      "consecutive_hard_failures": 0,
+      "last_success": "2026-05-02",
+      "last_error_type": null,
+      "last_error_date": null
+    },
+    "https://pytorch.org/feed.xml": {
+      "consecutive_hard_failures": 3,
+      "last_error_date": "2026-04-21",
+      "last_error_type": "status:404",
+      "last_success": null
+    },
+    "https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://research.google/blog/rss": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://rss.arxiv.org/rss/cs.AI": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://rss.arxiv.org/rss/cs.CL": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://rss.arxiv.org/rss/cs.LG": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://semiengineering.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://simonwillison.net/atom/everything/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://techcrunch.com/category/artificial-intelligence/feed/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://thegradient.pub/rss/": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://thezvi.substack.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://wandb.ai/fully-connected": {
+      "consecutive_hard_failures": 0,
+      "last_success": "2026-05-02",
+      "last_error_type": null,
+      "last_error_date": null
+    },
+    "https://wandb.ai/fully-connected/rss.xml": {
+      "consecutive_hard_failures": 3,
+      "last_error_date": "2026-04-21",
+      "last_error_type": "content_mismatch",
+      "last_success": null
+    },
+    "https://www.alignmentforum.org/feed.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.interconnects.ai/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.nist.gov/news-events/information%20technology/rss.xml": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.oneusefulthing.org/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.semianalysis.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.technologyreview.com/feed": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    },
+    "https://www.theregister.com/software/ai_ml/headlines.atom": {
+      "consecutive_hard_failures": 0,
+      "last_error_date": null,
+      "last_error_type": null,
+      "last_success": "2026-05-02"
+    }
   }
 }
