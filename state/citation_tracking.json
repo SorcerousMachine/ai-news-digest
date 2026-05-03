@@ -49,6 +49,18 @@
       ],
       "origin": "https://aws.amazon.com"
     },
+    "Academy of Motion Picture Arts and Sciences": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://techcrunch.com"
+    },
+    "Acai.sh": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://acai.sh"
+    },
     "Adobe": {
       "dates": [
         "2026-04-29"
@@ -117,9 +129,10 @@
         "2026-04-24",
         "2026-04-25",
         "2026-04-26",
-        "2026-04-28"
+        "2026-04-28",
+        "2026-05-03"
       ],
-      "origin": "https://openai.com"
+      "origin": "https://www.bloomberg.com"
     },
     "Brex": {
       "dates": [
@@ -145,6 +158,12 @@
         "2026-04-28"
       ],
       "origin": "https://www.technologyreview.com"
+    },
+    "Caixin Global": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://www.bloomberg.com"
     },
     "CertiK": {
       "dates": [
@@ -209,7 +228,8 @@
     "GitHub": {
       "dates": [
         "2026-04-28",
-        "2026-04-29"
+        "2026-04-29",
+        "2026-05-03"
       ],
       "origin": "https://github.com"
     },
@@ -375,6 +395,12 @@
       ],
       "origin": "https://www.technologyreview.com"
     },
+    "Mendral": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://www.mendral.com"
+    },
     "Moonshot AI": {
       "dates": [
         "2026-04-21"
@@ -398,6 +424,12 @@
         "2026-04-16"
       ],
       "origin": "https://www.nist.gov"
+    },
+    "NPR": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://www.bloomberg.com"
     },
     "NVIDIA": {
       "dates": [
@@ -605,6 +637,12 @@
       ],
       "origin": "https://www.theregister.com"
     },
+    "The New York Times": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://www.nytimes.com"
+    },
     "The Register": {
       "dates": [
         "2026-04-17",
@@ -704,6 +742,12 @@
         "2026-04-27"
       ],
       "origin": "https://twitter.com"
+    },
+    "thinkpol.ca": {
+      "dates": [
+        "2026-05-03"
+      ],
+      "origin": "https://thinkpol.ca"
     }
   }
 }
