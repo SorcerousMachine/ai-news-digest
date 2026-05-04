@@ -146,6 +146,12 @@
       ],
       "origin": "https://twitter.com"
     },
+    "CISA": {
+      "dates": [
+        "2026-05-04"
+      ],
+      "origin": "https://www.theregister.com"
+    },
     "CNBC": {
       "dates": [
         "2026-04-26",
@@ -229,7 +235,8 @@
       "dates": [
         "2026-04-28",
         "2026-04-29",
-        "2026-05-03"
+        "2026-05-03",
+        "2026-05-04"
       ],
       "origin": "https://github.com"
     },
@@ -290,9 +297,10 @@
         "2026-04-27",
         "2026-04-28",
         "2026-04-30",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-04"
       ],
-      "origin": "https://semgrep.dev"
+      "origin": "https://github.com"
     },
     "Hugging Face": {
       "dates": [
@@ -419,6 +427,12 @@
       ],
       "origin": "https://www.theregister.com"
     },
+    "NCSC-UK": {
+      "dates": [
+        "2026-05-04"
+      ],
+      "origin": "https://www.theregister.com"
+    },
     "NIST": {
       "dates": [
         "2026-04-16"
@@ -430,6 +444,12 @@
         "2026-05-03"
       ],
       "origin": "https://www.bloomberg.com"
+    },
+    "NSA": {
+      "dates": [
+        "2026-05-04"
+      ],
+      "origin": "https://www.theregister.com"
     },
     "NVIDIA": {
       "dates": [
@@ -550,7 +570,8 @@
         "2026-04-21",
         "2026-04-27",
         "2026-04-29",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-04"
       ],
       "origin": "https://semiengineering.com"
     },
@@ -627,7 +648,8 @@
         "2026-04-29",
         "2026-04-30",
         "2026-05-01",
-        "2026-05-02"
+        "2026-05-02",
+        "2026-05-04"
       ],
       "origin": "https://techcrunch.com"
     },
@@ -636,6 +658,12 @@
         "2026-04-29"
       ],
       "origin": "https://www.theregister.com"
+    },
+    "The Guardian": {
+      "dates": [
+        "2026-05-04"
+      ],
+      "origin": "https://techcrunch.com"
     },
     "The New York Times": {
       "dates": [
@@ -657,7 +685,8 @@
         "2026-04-29",
         "2026-04-30",
         "2026-05-01",
-        "2026-05-02"
+        "2026-05-02",
+        "2026-05-04"
       ],
       "origin": "https://www.theregister.com"
     },
@@ -695,7 +724,8 @@
       "dates": [
         "2026-04-17",
         "2026-04-26",
-        "2026-05-02"
+        "2026-05-02",
+        "2026-05-04"
       ],
       "origin": "https://arxiv.org"
     },
