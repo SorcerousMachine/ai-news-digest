@@ -1,0 +1,10 @@
+# Cloudflare Pages response headers.
+#
+# Path patterns scoped to /ai-news-digest/ so the mirror domain (which mounts
+# the digest at a different prefix) does not match these rules and does not
+# emit Link headers pointing at sorcerousmachine.com paths. Cross-domain leak
+# avoidance is by absence of match — never by per-domain config.
+
+/ai-news-digest/*
+  Link: </ai-news-digest/sitemap.xml>; rel="sitemap"
+  Link: </ai-news-digest/feed.xml>; rel="alternate"; type="application/rss+xml"
