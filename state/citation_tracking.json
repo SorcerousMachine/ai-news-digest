@@ -45,7 +45,8 @@
         "2026-04-21",
         "2026-04-22",
         "2026-04-29",
-        "2026-04-30"
+        "2026-04-30",
+        "2026-05-05"
       ],
       "origin": "https://aws.amazon.com"
     },
@@ -85,7 +86,8 @@
         "2026-04-24",
         "2026-04-25",
         "2026-04-26",
-        "2026-04-29"
+        "2026-04-29",
+        "2026-05-05"
       ],
       "origin": "https://www.anthropic.com"
     },
@@ -155,15 +157,22 @@
     "CNBC": {
       "dates": [
         "2026-04-26",
-        "2026-04-29"
+        "2026-04-29",
+        "2026-05-05"
       ],
-      "origin": "https://techcrunch.com"
+      "origin": "https://siliconangle.com"
     },
     "CNN": {
       "dates": [
         "2026-04-28"
       ],
       "origin": "https://www.technologyreview.com"
+    },
+    "CPR News": {
+      "dates": [
+        "2026-05-05"
+      ],
+      "origin": "https://coloradonewsline.com"
     },
     "Caixin Global": {
       "dates": [
@@ -182,6 +191,12 @@
         "2026-04-18"
       ],
       "origin": "https://blog.cloudflare.com"
+    },
+    "Colorado Newsline": {
+      "dates": [
+        "2026-05-05"
+      ],
+      "origin": "https://coloradonewsline.com"
     },
     "Counterpoint Research": {
       "dates": [
@@ -236,7 +251,8 @@
         "2026-04-28",
         "2026-04-29",
         "2026-05-03",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
       "origin": "https://github.com"
     },
@@ -298,9 +314,10 @@
         "2026-04-28",
         "2026-04-30",
         "2026-05-01",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
-      "origin": "https://github.com"
+      "origin": "https://openai.com"
     },
     "Hugging Face": {
       "dates": [
@@ -345,9 +362,10 @@
     },
     "IBM Research": {
       "dates": [
-        "2026-04-16"
+        "2026-04-16",
+        "2026-05-05"
       ],
-      "origin": ""
+      "origin": "https://simonwillison.net"
     },
     "Inc.": {
       "dates": [
@@ -364,7 +382,8 @@
     "Interconnects": {
       "dates": [
         "2026-04-17",
-        "2026-04-21"
+        "2026-04-21",
+        "2026-05-05"
       ],
       "origin": "https://www.interconnects.ai"
     },
@@ -388,9 +407,10 @@
         "2026-04-26",
         "2026-04-27",
         "2026-04-29",
-        "2026-04-30"
+        "2026-04-30",
+        "2026-05-05"
       ],
-      "origin": "https://openai.com"
+      "origin": "https://github.com"
     },
     "MIT Technology Review": {
       "dates": [
@@ -399,7 +419,8 @@
         "2026-04-24",
         "2026-04-25",
         "2026-04-28",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-05"
       ],
       "origin": "https://www.technologyreview.com"
     },
@@ -498,9 +519,10 @@
         "2026-04-28",
         "2026-04-29",
         "2026-04-30",
-        "2026-05-01"
+        "2026-05-01",
+        "2026-05-05"
       ],
-      "origin": "https://simonwillison.net"
+      "origin": "https://openai.com"
     },
     "OpenClaw": {
       "dates": [
@@ -571,7 +593,8 @@
         "2026-04-27",
         "2026-04-29",
         "2026-05-01",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
       "origin": "https://semiengineering.com"
     },
@@ -589,9 +612,10 @@
     },
     "SiliconANGLE": {
       "dates": [
-        "2026-04-26"
+        "2026-04-26",
+        "2026-05-05"
       ],
-      "origin": "https://www.bloomberg.com"
+      "origin": "https://siliconangle.com"
     },
     "Simon Willison": {
       "dates": [
@@ -602,9 +626,10 @@
         "2026-04-23",
         "2026-04-24",
         "2026-04-25",
-        "2026-04-28"
+        "2026-04-28",
+        "2026-05-05"
       ],
-      "origin": "https://openai.com"
+      "origin": "https://simonwillison.net"
     },
     "Simon Willison's Weblog": {
       "dates": [
@@ -649,7 +674,8 @@
         "2026-04-30",
         "2026-05-01",
         "2026-05-02",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
       "origin": "https://techcrunch.com"
     },
@@ -658,6 +684,12 @@
         "2026-04-29"
       ],
       "origin": "https://www.theregister.com"
+    },
+    "Terence Eden": {
+      "dates": [
+        "2026-05-05"
+      ],
+      "origin": "https://go.theregister.com"
     },
     "The Guardian": {
       "dates": [
@@ -686,9 +718,10 @@
         "2026-04-30",
         "2026-05-01",
         "2026-05-02",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
-      "origin": "https://www.theregister.com"
+      "origin": "https://go.theregister.com"
     },
     "Tom's Hardware": {
       "dates": [
@@ -725,7 +758,8 @@
         "2026-04-17",
         "2026-04-26",
         "2026-05-02",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-05"
       ],
       "origin": "https://arxiv.org"
     },
@@ -772,6 +806,12 @@
         "2026-04-27"
       ],
       "origin": "https://twitter.com"
+    },
+    "thatprivacyguy.com": {
+      "dates": [
+        "2026-05-05"
+      ],
+      "origin": "https://www.thatprivacyguy.com"
     },
     "thinkpol.ca": {
       "dates": [
